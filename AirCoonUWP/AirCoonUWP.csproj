@@ -95,6 +95,22 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Game\Controller\SaveGame\LoadScreen.xaml.cs">
+      <DependentUpon>LoadScreen.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Game\Controller\SaveGame\NewGame.xaml.cs">
+      <DependentUpon>NewGame.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Game\Handler\DataCsvLoader.cs" />
+    <Compile Include="Game\Handler\Debug.cs" />
+    <Compile Include="Game\Handler\SaveGame.cs" />
+    <Compile Include="Game\Models\Airport.cs" />
+    <Compile Include="Game\Models\Geo\Continent.cs" />
+    <Compile Include="Game\Models\Geo\Country.cs" />
+    <Compile Include="Game\Models\Geo\GeoCoordinate.cs" />
+    <Compile Include="Game\Models\Geo\Region.cs" />
+    <Compile Include="Game\Models\Money.cs" />
+    <Compile Include="Game\Models\Weather.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
@@ -105,6 +121,18 @@
       <SubType>Designer</SubType>
     </AppxManifest>
     <None Include="AirCoonUWP_TemporaryKey.pfx" />
+    <Content Include="Data\airports.dat">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\continents.dat">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\countries.dat">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\regions.dat">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Properties\Default.rd.xml" />
@@ -121,6 +149,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Game\Controller\SaveGame\LoadScreen.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Game\Controller\SaveGame\NewGame.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -130,6 +166,9 @@
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
       <Version>6.1.5</Version>
     </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Game\Models\Airline\" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
