@@ -27,7 +27,10 @@ namespace AirCoon.Game.Handler
         public Dictionary<String, Region> Regions = new Dictionary<String, Region>();
         public Dictionary<String, Airport> Airports = new Dictionary<string, Airport>();
 
-        private SaveGame()
+        /*
+         
+         */
+        public SaveGame()
         {
 
         }
@@ -83,7 +86,23 @@ namespace AirCoon.Game.Handler
         } // end getavailiblesavegames
 
 
+        public List<Dictionary<string, string>> GetAvailibleHubNames()
+        {
+            List<Dictionary<string, string>> airports = new List<Dictionary<string, string> >();
+            this.SetPaths();
+            StreamReader stream = new StreamReader(ConfigPath + "\\airports.dat");
+            DataCsvLoader csv = new DataCsvLoader(stream, false,true);
+            Dictionary<string,string> line = csv.GetNextLineHeaders();
+            while (line != null)
+            {
+                if (line["IsHub"] == "1")
 
+                        airports.Add(line);
+                line = csv.GetNextLineHeaders();
+            }
+
+                return airports;
+        }
 
 
         /* This just loads the savegame*/

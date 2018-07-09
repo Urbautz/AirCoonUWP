@@ -7,13 +7,52 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     Title="Start a new Game"
-    PrimaryButtonText="Load"
+    PrimaryButtonText="Create"
     SecondaryButtonText="Cancel"
     PrimaryButtonClick="ContentDialog_PrimaryButtonClick"
-    SecondaryButtonClick="ContentDialog_SecondaryButtonClick">
+    SecondaryButtonClick="ContentDialog_SecondaryButtonClick"
+>
     <ContentDialog.Background>
         <AcrylicBrush TintColor="#997ac5ea" BackgroundSource="Backdrop" TintOpacity="0.6"/>
     </ContentDialog.Background>
     <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+        </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            
+        <TextBlock Grid.Row="0" Grid.Column="0" 
+                   VerticalAlignment="Center" HorizontalAlignment="Right">
+            Name: </TextBlock>
+        <TextBox MinWidth="200" Grid.Row="0" Grid.Column="1" Margin="10,5,5,0"
+                 Name="Name" PlaceholderText="Just a name!"></TextBox>
+        
+        <TextBlock Grid.Row="1" Grid.Column="0" 
+                   VerticalAlignment="Center" HorizontalAlignment="Right">
+            Code: </TextBlock>
+        <TextBox MinWidth="200" Grid.Row="1" Grid.Column="1" Margin="10,5,5,0"
+                 Name="Code" PlaceholderText="2 or 3 letter code"></TextBox>
+        
+        <TextBlock  Grid.Row="2" Grid.Column="0" 
+                  VerticalAlignment="Center" HorizontalAlignment="Right">
+            Your first Hub:</TextBlock>
+        <ComboBox MinWidth="200" Grid.Row="2" Grid.Column="1" Margin="10,5,5,0"
+                 Name="Hub" >
+
+        </ComboBox>
+
+        <TextBlock Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2"
+                   HorizontalAlignment="Center" Margin="10,25,10,10"
+                   Foreground="IndianRed">
+
+        </TextBlock>
+
+
     </Grid>
 </ContentDialog>

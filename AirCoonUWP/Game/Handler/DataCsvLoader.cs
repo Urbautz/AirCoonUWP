@@ -56,6 +56,8 @@ namespace AirCoon.Game.Handler
         public Dictionary<string, string> GetNextLineHeaders(int minElements = 2)
         {
             String[] data = this.GetNextLine(minElements);
+
+            if (data == null) return null;
             Dictionary<string, string> result = new Dictionary<string, string>();
             if (data.Length != this.Headers.Length)
                 return null;
