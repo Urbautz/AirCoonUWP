@@ -1,4 +1,4 @@
-﻿iata_code,ident,iso_region,municipality,name,is Hub,latitude_deg,longitude_deg,elevation_ft,type,RW Length,# RW,Slots ,Boarding new Passengers
+﻿Iata,Icao,Region,Municipality,Name,IsHub,Latitude,Longitude,Elevation,Type,RunwayLength,RunwayCount,Slots,Passengers
 ATL,KATL,US-GA,Atlanta,Hartsfield Jackson Atlanta International Airport,1,33.63669968,-84.42810059,1026,L,11890,5,24,106166
 ORD,KORD,US-IL,Chicago,Chicago O'Hare International Airport,1,41.97859955,-87.90480042,672,L,13000,9,35,76392
 LHR,EGLL,GB-ENG,London,London Heathrow Airport,1,51.4706,-0.461941,83,L,12799,2,19,69639
