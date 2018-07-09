@@ -1,6 +1,6 @@
-Alpha-2 code,English short name,Continent
+Code,Name,Continent
 AF,Afghanistan,AS
-AX,Åland Islands,EU
+AX,Ã…land Islands,EU
 AL,Albania,EU
 DZ,Algeria,AF
 AS,American Samoa,NA
@@ -53,10 +53,10 @@ CD,Congo (the Democratic Republic of the),AF
 CG,Congo (the),AF
 CK,Cook Islands (the),OZ
 CR,Costa Rica,NA
-CI,Côte d'Ivoire,AF
+CI,CÃ´te d'Ivoire,AF
 HR,Croatia,EU
 CU,Cuba,NA
-CW,Curaçao,SA
+CW,CuraÃ§ao,SA
 CY,Cyprus,EU
 CZ,Czechia,EU
 DK,Denmark,EU
@@ -179,11 +179,11 @@ PL,Poland,EU
 PT,Portugal,EU
 PR,Puerto Rico,NA
 QA,Qatar,AS
-RE,Réunion,AF
+RE,RÃ©union,AF
 RO,Romania,EU
 RU,Russian Federation (the),AS
 RW,Rwanda,AF
-BL,Saint Barthélemy,OZ
+BL,Saint BarthÃ©lemy,OZ
 SH,Saint Helena; Ascension and Tristan da Cunha,AF
 KN,Saint Kitts and Nevis,NA
 LC,Saint Lucia,NA
