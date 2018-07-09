@@ -95,11 +95,11 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Game\Controller\SaveGame\LoadScreen.xaml.cs">
-      <DependentUpon>LoadScreen.xaml</DependentUpon>
+    <Compile Include="Game\Controller\SaveGame\DialogGameLoad.xaml.cs">
+      <DependentUpon>DialogGameLoad.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Game\Controller\SaveGame\NewGame.xaml.cs">
-      <DependentUpon>NewGame.xaml</DependentUpon>
+    <Compile Include="Game\Controller\SaveGame\DialogNewGame.xaml.cs">
+      <DependentUpon>DialogNewGame.xaml</DependentUpon>
     </Compile>
     <Compile Include="Game\Handler\DataCsvLoader.cs" />
     <Compile Include="Game\Handler\Debug.cs" />
@@ -149,11 +149,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="Game\Controller\SaveGame\LoadScreen.xaml">
+    <Page Include="Game\Controller\SaveGame\DialogGameLoad.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Game\Controller\SaveGame\NewGame.xaml">
+    <Page Include="Game\Controller\SaveGame\DialogNewGame.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

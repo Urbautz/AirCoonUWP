@@ -144,7 +144,7 @@ namespace AirCoon.Game.Handler
             StreamReader stream = new StreamReader(ConfigPath + "\\Continents.dat");
             DataCsvLoader csv = new DataCsvLoader(stream, true);
             List<Continent> continents = new List<Continent>();
-            string[] line = csv.getNextLine();
+            string[] line = csv.GetNextLine();
             do
             {
                 String contcode = line[0];
@@ -155,7 +155,7 @@ namespace AirCoon.Game.Handler
                     weather[i - 2] = int.Parse(line[i]);
                 }
                 Continent c = new Continent(contcode, contname, weather);
-                line = csv.getNextLine();
+                line = csv.GetNextLine();
             } while (line != null);
             stream = null;
 
@@ -164,7 +164,7 @@ namespace AirCoon.Game.Handler
             Debug.Write("Loading Countries", 3);
             stream = new StreamReader(ConfigPath + "\\Countries.dat");
             csv = new DataCsvLoader(stream, true);
-            line = csv.getNextLine();
+            line = csv.GetNextLine();
             while(line != null)
             {   
                 if (!this.Continents.ContainsKey(line[2])) {
@@ -172,14 +172,14 @@ namespace AirCoon.Game.Handler
                 }
                 Continent cont = this.Continents[line[2]];
                 Country country = new Country(line[0], line[1], cont);
-                line = csv.getNextLine();
+                line = csv.GetNextLine();
             }
 
             // Initialize Regions
             Debug.Write("Loading Regions", 3);
             stream = new StreamReader(ConfigPath + "\\regions.dat");
             csv = new DataCsvLoader(stream, true);
-            line = csv.getNextLine();
+            line = csv.GetNextLine();
             while (line != null)
             {
                 if (!this.Countries.ContainsKey(line[1]))
@@ -188,7 +188,7 @@ namespace AirCoon.Game.Handler
                 }
                 Country c = this.Countries[line[1]];
                 Region r = new Region(line[0], line[2], c);
-                line = csv.getNextLine();
+                line = csv.GetNextLine();
             }
 
             //Regionen und Flughäfen laden.
@@ -196,7 +196,7 @@ namespace AirCoon.Game.Handler
 
             stream = new StreamReader(ConfigPath + "\\airports.dat");
             csv = new DataCsvLoader(stream, true);
-            line = csv.getNextLine();
+            line = csv.GetNextLine();
             while (line != null)
             {
                 if (!this.Regions.ContainsKey(line[2]))
@@ -234,7 +234,7 @@ namespace AirCoon.Game.Handler
                 Airport a = new Airport(line[0], line[1], line[4], r, Ishub, g, line[9], line[3], RunwayLength, RunwayCount, slots, passengers);
 
 
-                line = csv.getNextLine();
+                line = csv.GetNextLine();
             }
 
 

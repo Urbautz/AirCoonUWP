@@ -1,4 +1,5 @@
-﻿using System.Numerics;
+﻿using System;
+using System.Numerics;
 using Windows.ApplicationModel.Core;
 using Windows.UI;
 using Windows.UI.Composition;
@@ -26,11 +27,16 @@ namespace AirCoonUWP
         {
 
             InitializeComponent();
-            //ApplyAcrylicAccent(AcrylicBackground);
             Loaded += PageOnLoaded;
-            //Root.IsEnabled = false;
-            OuterFrame.Content = new AirCoonUWP.Game.Controller.SaveGame.LoadScreen();
+            this.SaveGameDialogAsync();
+
             SaveGamePublic.OuterFrame = this;
+        }
+
+        public async void SaveGameDialogAsync()
+        {
+            DialogGameLoad dialog = new DialogGameLoad();
+            await dialog.ShowAsync();
         }
 
         private static void PageOnLoaded(object sender, RoutedEventArgs e)

@@ -21,11 +21,11 @@ namespace AirCoon.Game.Handler
             {
                 LastLine = Stream.ReadLine();
             } else if (firstlineisheaders) {
-                Headers = this.getNextLine();
+                Headers = this.GetNextLine();
             }
         }
 
-        public String[] getNextLine(int minElements = 2)
+        public String[] GetNextLine(int minElements = 2)
         {
             PrevLine = LastLine;
             LastLine = Stream.ReadLine();
@@ -52,17 +52,18 @@ namespace AirCoon.Game.Handler
             return splitted;
             
         }
-        
-        public Dictionary<string,string> getNextLineHeaders(int minElements = 2)
-            String[] data = this.getNextLine(minElements);
-            Dictionary<string,string> result = new Dictionary<string,string>
-            if(data.Length != this.Headers.Length)
+
+        public Dictionary<string, string> GetNextLineHeaders(int minElements = 2)
+        {
+            String[] data = this.GetNextLine(minElements);
+            Dictionary<string, string> result = new Dictionary<string, string>();
+            if (data.Length != this.Headers.Length)
                 return null;
-            
-            for(i = 0; i<data.Length; i++) {
-                result.add(this.Headers[i], data[i]);
+
+            for (int i = 0; i < data.Length; i++) {
+                result.Add(this.Headers[i], data[i]);
             }
             return result;
-        
+        }
     }
 }
