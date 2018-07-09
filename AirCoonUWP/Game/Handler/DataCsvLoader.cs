@@ -12,14 +12,16 @@ namespace AirCoon.Game.Handler
         private StreamReader Stream;
         private String LastLine;
         private String PrevLine;
+        private String[] Headers;
 
-        public DataCsvLoader(StreamReader stream, bool stripfirstline=true)
+        public DataCsvLoader(StreamReader stream, bool stripfirstline=true, bool firstlineisheaders=false)
         {
             this.Stream = stream;
             if(stripfirstline)
             {
                 LastLine = Stream.ReadLine();
-                
+            } else if (firstlineisheaders) {
+                Headers = this.getNextLine();
             }
         }
 
@@ -46,12 +48,21 @@ namespace AirCoon.Game.Handler
                 Debug.Write("Min. number of elements not found " + PrevLine, 1);
                 Stream.Close();
                 return null;
-            }
-            
+            }     
             return splitted;
             
         }
-
-
+        
+        public Dictionary<string,string> getNextLineHeaders(int minElements = 2)
+            String[] data = this.getNextLine(minElements);
+            Dictionary<string,string> result = new Dictionary<string,string>
+            if(data.Length != this.Headers.Length)
+                return null;
+            
+            for(i = 0; i<data.Length; i++) {
+                result.add(this.Headers[i], data[i]);
+            }
+            return result;
+        
     }
 }
