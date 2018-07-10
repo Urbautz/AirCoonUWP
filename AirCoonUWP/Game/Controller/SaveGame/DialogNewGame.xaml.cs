@@ -36,13 +36,32 @@ namespace AirCoonUWP.Game.Controller.SaveGame
                 Hub.Items.Add(b);
             } // End Foreach
         } // End Constructor
-        
-        /*Create Button*/
-        private void ContentDialog_PrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
+
+        public DialogNewGame(String name, String code, String Iata, String message)
         {
+            AirCoon.Game.Handler.SaveGame sg = new AirCoon.Game.Handler.SaveGame();
+            List<Dictionary<string, string>> aps = sg.GetAvailibleHubNames();
+            this.InitializeComponent();
+            Name.Text = name;
+            Code.Text = code;
+            Error.Text = message;
+            foreach (Dictionary<string, string> ap in aps)
+            {
+                ComboBoxItem b = new ComboBoxItem();
+                b.Tag = ap["Iata"];
+                b.Content = ap["Iata"] + " - " + ap["Name"];
+                if (ap["Iata"] == Iata)
+                    b.IsSelected = true;
+                Hub.Items.Add(b);
+            } // End Foreach
+        } // End Constructor
+
+        /*Create Button*/
+        private async void ContentDialog_PrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
+        {
+            ComboBoxItem selected = (ComboBoxItem)Hub.SelectedValue;
             try {
-                object o = Hub.SelectedValue;
-                ComboBoxItem selected = (ComboBoxItem) Hub.SelectedValue;
+
 
                AirCoon.Game.Handler.SaveGame sg = 
                     new AirCoon.Game.Handler.SaveGame(selected.Tag.ToString(), 
@@ -50,8 +69,13 @@ namespace AirCoonUWP.Game.Controller.SaveGame
                                                       Name.Text
                                                       );
                 int i = 1;
-            } catch (SaveGameException e) { 
-                Error.Text = e.Message;
+            } catch (SaveGameException e) {
+                DialogNewGame dialog = new DialogNewGame(Name.Text, Code.Text, 
+                                                    selected.Tag.ToString(),
+                                                    e.Message
+                                                    );
+                this.Hide();
+                await dialog.ShowAsync();
             }
 
             

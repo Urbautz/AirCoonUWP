@@ -124,7 +124,7 @@ namespace AirCoon.Game.Handler
             // Check Code
             // check if name already exists
 
-            if(code.Length < 2 && code.Length > 3)
+            if(code.Length < 2 || code.Length > 3)
             {
                 throw new SaveGameException("Code " + code + " must be 2 or 3 digits long");
             }
