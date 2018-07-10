@@ -9,16 +9,31 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
     <Page.Resources>
         <AcrylicBrush x:Key="Brush60" TintColor="#997ac5ea" BackgroundSource="HostBackdrop" TintOpacity="0.6"/>
+        <AcrylicBrush x:Key="Transparent" TintColor="#997ac5ea" BackgroundSource="HostBackdrop" TintOpacity="0.2"/>
         <Style TargetType="Frame">
             <Setter Property="Background" Value="{StaticResource Brush60}" />
+        </Style>
+        <Style TargetType="Grid" x:Key="OuterGrid">
+            <Setter Property="Background" Value="{StaticResource Transparent}" />
         </Style>
     </Page.Resources>
 
 
-    <Frame Name="OuterFrame">
+    <Grid Style="{StaticResource OuterGrid}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+        </Grid.RowDefinitions>
 
 
-
-    </Frame>
+        <AppBar Grid.Row="1" IsSticky="True">
+            <AppBarToggleButton Icon="Like" Label="SymbolIcon"/>
+            <AppBarButton Icon="Like" Label="SymbolIcon"/>
+            
+        </AppBar>
+    </Grid>
 
 </Page>

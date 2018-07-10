@@ -70,7 +70,7 @@ namespace AirCoonUWP
 
         public void SetFrameContent(Page p)
         {
-            OuterFrame.Content = p;
+            //OuterFrame.Content = p;
         }
 
     }
