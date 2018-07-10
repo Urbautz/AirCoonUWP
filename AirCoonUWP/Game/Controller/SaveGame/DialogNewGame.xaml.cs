@@ -24,8 +24,6 @@ namespace AirCoonUWP.Game.Controller.SaveGame
         {
             AirCoon.Game.Handler.SaveGame sg = new AirCoon.Game.Handler.SaveGame();
             List<Dictionary<string, string>> aps = sg.GetAvailibleHubNames();
-
-
             this.InitializeComponent();
 
             foreach (Dictionary<string, string> ap in aps )
@@ -36,15 +34,26 @@ namespace AirCoonUWP.Game.Controller.SaveGame
                 if (ap["Iata"] == "ATL")
                     b.IsSelected = true;
                 Hub.Items.Add(b);
-            }
-
-
-        }
-
+            } // End Foreach
+        } // End Constructor
+        
+        /*Create Button*/
         private void ContentDialog_PrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
         {
+            try {
+                AirCoon.Game.Handler.SaveGame sg = 
+                    new AirCoon.Game.Handler.SaveGame(
+                                                      Name, Code,
+                                                      Combobox.SelectedItem.blahblah
+                                                      );
+            } catch SaveGameException e {
+                Error.Content = e.Message;
+            }
+            
+            
         }
 
+        /* Cancel Button */
         private async void ContentDialog_SecondaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
         {
             this.Hide();
@@ -52,5 +61,5 @@ namespace AirCoonUWP.Game.Controller.SaveGame
             this.Hide();
             await dialog.ShowAsync();
         }
-    }
-}
+    } // end class
+} // end Namespace
