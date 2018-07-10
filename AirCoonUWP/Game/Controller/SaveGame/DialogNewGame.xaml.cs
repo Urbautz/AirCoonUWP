@@ -41,15 +41,19 @@ namespace AirCoonUWP.Game.Controller.SaveGame
         private void ContentDialog_PrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
         {
             try {
-                AirCoon.Game.Handler.SaveGame sg = 
-                    new AirCoon.Game.Handler.SaveGame(
-                                                      Name, Code,
-                                                      Combobox.SelectedItem.blahblah
+                object o = Hub.SelectedValue;
+                ComboBoxItem selected = (ComboBoxItem) Hub.SelectedValue;
+
+               AirCoon.Game.Handler.SaveGame sg = 
+                    new AirCoon.Game.Handler.SaveGame(selected.Tag.ToString(), 
+                                                      Code.Text,
+                                                      Name.Text
                                                       );
-            } catch SaveGameException e {
-                Error.Content = e.Message;
+                int i = 1;
+            } catch (SaveGameException e) { 
+                Error.Text = e.Message;
             }
-            
+
             
         }
 
