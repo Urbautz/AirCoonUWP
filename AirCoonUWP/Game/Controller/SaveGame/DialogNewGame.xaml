@@ -47,9 +47,11 @@
 
         </ComboBox>
 
-        <TextBlock Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2"
+        <TextBlock Name="Error"
+                   Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2"
                    HorizontalAlignment="Center" Margin="10,25,10,10"
-                   Foreground="IndianRed">
+                   Foreground="IndianRed"
+                   >
 
         </TextBlock>
 
