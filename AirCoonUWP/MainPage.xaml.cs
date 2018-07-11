@@ -22,6 +22,23 @@ namespace AirCoonUWP
 
         private Compositor _compositor;
         private SpriteVisual _hostSprite;
+        private readonly IList<(string Tag, Type Page)> _pages = new List<(string Tag, Type Page)>
+        {
+            ("World", typeof(OverView)),
+            ("AirlineDetails", typeof(AirlineDetails)),
+            ("Alliance", typeof(Alliance)),
+            
+            ("Bases", typeof(Bases)),
+            ("Fleet", typeof(Fleet)),
+            ("FlightPlan", typeof(FlightPlan)),
+
+            
+            ("Finance", typeof(Finance)),
+            ("Personel", typeof(Personel)),
+            ("Marketing", typeof(Marketing))
+            
+        };
+        
 
         public MainPage()
         {
@@ -29,8 +46,8 @@ namespace AirCoonUWP
             InitializeComponent();
             Loaded += PageOnLoaded;
             this.SaveGameDialogAsync();
-
             SaveGamePublic.OuterFrame = this;
+            this.NavViewNavigate("World");
         }
 
         public async void SaveGameDialogAsync()
@@ -67,14 +84,60 @@ namespace AirCoonUWP
             if (_hostSprite != null)
                 _hostSprite.Size = e.NewSize.ToVector2();
         }
+        
+        private void NavViewLoaded(object sender, RoutedEventArgs e)
+        {
+            //ContentFrame.Navigated += On_Navigated;
+
+            // NavView doesn't load any page by default: you need to specify it
+            //NavView_Navigate("home");
+
+            // Add keyboard accelerators for backwards navigation
+            var goBack = new KeyboardAccelerator { Key = VirtualKey.GoBack };
+            goBack.Invoked += BackInvoked;
+            this.KeyboardAccelerators.Add(goBack);
+
+            // ALT routes here
+            var altLeft = new KeyboardAccelerator
+            {
+                Key = VirtualKey.Left,
+                Modifiers = VirtualKeyModifiers.Menu
+            };
+            altLeft.Invoked += BackInvoked;
+            this.KeyboardAccelerators.Add(altLeft);
+        } // end NavViewLoaded
+
+        private void Navigate(NavigationView sender, NavigationViewItemInvokedEventArgs args)
+        {
+            if (args.IsSettingsInvoked)
+            {
+                ContentFrame.Navigate(typeof(SettingsPage));
+            }
+            else
+            {
+                // Getting the Tag from Content (args.InvokedItem is the content of NavigationViewItem)
+                String navItemTag = NavView.MenuItems
+                      .OfType<NavigationViewItem>()
+                      .First(i => args.InvokedItem.Equals(i.Content))
+                      .Tag.ToString();
+                NavViewNavigate(navItemTag);
+            }
+        } // End Navigate
+
+        public void NavViewNavigate(string navItemTag)
+        {
+            var item = _pages.First(p => p.Tag.Equals(navItemTag));
+            ContentFrame.Navigate(item.Page);
+        }
+
 
         public void SetFrameContent(Page p)
         {
             //OuterFrame.Content = p;
-        }
+        } // End SetFrameContent
 
-    }
+    } // End Class
 
 
 
-}
+} // End Namepsace
