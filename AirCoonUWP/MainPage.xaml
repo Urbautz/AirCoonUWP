@@ -38,25 +38,27 @@
                 <NavigationViewItem x:Uid="AirlineDetailsItem" Icon="Globe" Content="My Airline" Tag="AirlineDetails"/>
                 <NavigationViewItem x:Uid="AllianceItem" Icon="Link" Content="Alliance" My Airline" Tag="Alliance"/>
                 
-             <NavigationViewItemHeader Content="Operations />
-                 <NavigationViewItem x:Uid="AllianceItem" Icon="Link" Content="Alliance" My Airline" Tag="Alliance"/>
-                hier gehts weiter
-                
-                
-                
-                <NavigationViewItem x:Uid="HomeNavItem" Content="Home" Tag="home">
+                <NavigationViewItemSeparator/>
+                <NavigationViewItemHeader Content="Operations />
+                <NavigationViewItem x:Uid="BaseItem" Icon="Map" Content="Bases" Tag="Bases"/>
+                <NavigationViewItem x:Uid="FlightPlanItem" Icon="Clock" Content="Flight Plan" Tag="FlightPlan"/>
+                <NavigationViewItem x:Uid="FleetItem" Content="Fleet" Tag="Fleet"/>
                     <NavigationViewItem.Icon>
-                        <FontIcon Glyph="&#xE10F;"/>
-                        
-                        
+                        <FontIcon Glyph="&#xEB4C;"/><!-- or EC40 -->
+                    </NavigationViewItem.Icon>
+                                                                                                                  
+                <NavigationViewItemSeparator/>
+                <NavigationViewItemHeader Content="Management />
+
+                <NavigationViewItem x:Uid="Finance" Content="Alliance" Tag="Alliance">
+                    <NavigationViewItem.Icon>
+                        <FontIcon Glyph="&#xE1D0;"/>
                     </NavigationViewItem.Icon>
                 </NavigationViewItem>
-                <NavigationViewItemSeparator/>
-                <NavigationViewItemHeader Content="Main pages"/>
-                <NavigationViewItem x:Uid="AppsNavItem" Icon="AllApps" Content="Apps" Tag="apps"/>
-                <NavigationViewItem x:Uid="GamesNavItem" Icon="Video" Content="Games" Tag="games"/>
-                <NavigationViewItem x:Uid="MusicNavItem" Icon="Audio" Content="Music" Tag="music"/>
-            </NavigationView.MenuItems>
+                <NavigationViewItem x:Uid="HumanResourcesItem" Icon="People" Content="Human Resources" Tag="HR"/>     
+                <NavigationViewItem x:Uid="MarketingItem" Icon="LikeDislike" Content="Marketing" Tag="Marketing"/>                                  
+                               
+                
 
             <NavigationView.AutoSuggestBox>
                 <AutoSuggestBox x:Name="ASB" QueryIcon="Find"/>
