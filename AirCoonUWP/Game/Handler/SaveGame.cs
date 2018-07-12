@@ -142,7 +142,7 @@ namespace AirCoon.Game.Handler
 
             // Check Savegamefolder
 
-            if (Directory.Exists(SaveGameFolder + "\\" + name))
+            if (Directory.Exists(SaveGameFolder + "\\" + code))
             {
                 throw new SaveGameException("Savegame" + code + " already exists.");
             }

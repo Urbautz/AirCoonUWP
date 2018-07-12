@@ -95,11 +95,41 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Game\Controller\AirlineDetails\PageAirlineDetails.xaml.cs">
+      <DependentUpon>PageAirlineDetails.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Game\Controller\Alliance\PageAlliance.xaml.cs">
+      <DependentUpon>PageAlliance.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Game\Controller\Bases\PageBases.xaml.cs">
+      <DependentUpon>PageBases.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Game\Controller\Finance\PageFinance.xaml.cs">
+      <DependentUpon>PageFinance.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Game\Controller\Fleet\PageFleet.xaml.cs">
+      <DependentUpon>PageFleet.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Game\Controller\FlightPlan\PageFlightPlan.xaml.cs">
+      <DependentUpon>PageFlightPlan.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Game\Controller\Marketing\PageMarketing.xaml.cs">
+      <DependentUpon>PageMarketing.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Game\Controller\SaveGame\DialogGameLoad.xaml.cs">
       <DependentUpon>DialogGameLoad.xaml</DependentUpon>
     </Compile>
     <Compile Include="Game\Controller\SaveGame\DialogNewGame.xaml.cs">
       <DependentUpon>DialogNewGame.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Game\Controller\Settings\PageSettings.xaml.cs">
+      <DependentUpon>PageSettings.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Game\Controller\Staff\PageStaff.xaml.cs">
+      <DependentUpon>PageStaff.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Game\Controller\World\PageWorld.xaml.cs">
+      <DependentUpon>PageWorld.xaml</DependentUpon>
     </Compile>
     <Compile Include="Game\Handler\DataCsvLoader.cs" />
     <Compile Include="Game\Handler\Debug.cs" />
@@ -149,11 +179,51 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Game\Controller\AirlineDetails\PageAirlineDetails.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Game\Controller\Alliance\PageAlliance.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Game\Controller\Bases\PageBases.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Game\Controller\Finance\PageFinance.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Game\Controller\Fleet\PageFleet.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Game\Controller\FlightPlan\PageFlightPlan.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Game\Controller\Marketing\PageMarketing.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Game\Controller\SaveGame\DialogGameLoad.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Game\Controller\SaveGame\DialogNewGame.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Game\Controller\Settings\PageSettings.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Game\Controller\Staff\PageStaff.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Game\Controller\World\PageWorld.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

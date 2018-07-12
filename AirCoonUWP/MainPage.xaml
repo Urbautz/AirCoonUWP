@@ -35,66 +35,48 @@
             <NavigationView.MenuItems>
                 <NavigationViewItemHeader Content="Overview"/>
                 <NavigationViewItem x:Uid="WorldNavItem" Icon="Globe" Content="World" Tag="World"/>
-                <NavigationViewItem x:Uid="AirlineDetailsItem" Icon="Globe" Content="My Airline" Tag="AirlineDetails"/>
-                <NavigationViewItem x:Uid="AllianceItem" Icon="Link" Content="Alliance" My Airline" Tag="Alliance"/>
-                
-                <NavigationViewItemSeparator/>
-                <NavigationViewItemHeader Content="Operations />
-                <NavigationViewItem x:Uid="BaseItem" Icon="Map" Content="Bases" Tag="Bases"/>
-                <NavigationViewItem x:Uid="FlightPlanItem" Icon="Clock" Content="Flight Plan" Tag="FlightPlan"/>
-                <NavigationViewItem x:Uid="FleetItem" Content="Fleet" Tag="Fleet"/>
-                    <NavigationViewItem.Icon>
-                        <FontIcon Glyph="&#xEB4C;"/><!-- or EC40 -->
-                    </NavigationViewItem.Icon>
-                                                                                                                  
-                <NavigationViewItemSeparator/>
-                <NavigationViewItemHeader Content="Management />
+                <NavigationViewItem x:Uid="AirlineDetailsItem" Icon="Home" Content="My Airline" Tag="AirlineDetails"/>
+                <NavigationViewItem x:Uid="AllianceItem" Icon="Link" Content="Alliance" Tag="Alliance"/>
 
-                <NavigationViewItem x:Uid="Finance" Content="Alliance" Tag="Alliance">
+                <NavigationViewItemSeparator/>
+                <NavigationViewItemHeader Content="Operations" />
+                <NavigationViewItem x:Uid="BaseItem" Icon="Map" Content="Bases" Tag="Bases"/>
+                <NavigationViewItem x:Uid="FlightPlanItem" Icon="Calendar"  Content="Flightplan" Tag="FlightPlan"/>
+                <NavigationViewItem x:Uid="FleetItem" Content="Fleet" Tag="Fleet">
+                    <NavigationViewItem.Icon>
+                        <FontIcon Glyph="&#xEC40;"/>
+                        <!-- or EC40 -->
+                    </NavigationViewItem.Icon>
+                </NavigationViewItem>
+
+                <NavigationViewItemSeparator/>
+                <NavigationViewItemHeader Content="Management" />
+                <NavigationViewItem x:Uid="FinanceItem" Content="Finance" Tag="Finance">
                     <NavigationViewItem.Icon>
                         <FontIcon Glyph="&#xE1D0;"/>
                     </NavigationViewItem.Icon>
                 </NavigationViewItem>
-                <NavigationViewItem x:Uid="HumanResourcesItem" Icon="People" Content="Human Resources" Tag="HR"/>     
-                <NavigationViewItem x:Uid="MarketingItem" Icon="LikeDislike" Content="Marketing" Tag="Marketing"/>                                  
-                               
-                
+                <NavigationViewItem x:Uid="HumanResourcesItem" Icon="People" Content="Human Resources" Tag="HR" />
+                <NavigationViewItem x:Uid="MarketingItem" Icon="LikeDislike" Content="Marketing" Tag="Marketing" />
+            </NavigationView.MenuItems>
 
-            <NavigationView.AutoSuggestBox>
-                <AutoSuggestBox x:Name="ASB" QueryIcon="Find"/>
-            </NavigationView.AutoSuggestBox>
 
-            <NavigationView.HeaderTemplate>
-                <DataTemplate>
-                    <Grid Margin="24,10,0,0">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition/>
-                        </Grid.ColumnDefinitions>
-                        <TextBlock Style="{StaticResource TitleTextBlockStyle}"
+            <NavigationView.Header>
+                <Grid Margin="24,10,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Name="PageTitle"
+                            Style="{StaticResource TitleTextBlockStyle}"
                                FontSize="28"
                                VerticalAlignment="Center"
-                               Text="Welcome"/>
-                        <CommandBar Grid.Column="1"
-                                HorizontalAlignment="Right"
-                                VerticalAlignment="Top"
-                                DefaultLabelPosition="Right"
-                                Background="{ThemeResource SystemControlBackgroundAltHighBrush}">
-                            <AppBarButton Label="Refresh" Icon="Refresh"/>
-                            <AppBarButton Label="Import" Icon="Import"/>
-                        </CommandBar>
-                    </Grid>
-                </DataTemplate>
-            </NavigationView.HeaderTemplate>
+                               Text="{Binding _CurrentPageName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                </Grid>
+            </NavigationView.Header>
 
-            <NavigationView.PaneFooter>
-                <HyperlinkButton x:Name="MoreInfoBtn"
-                                 Content="More info"
-                                 Click="More_Click"
-                                 Margin="12,0"/>
-            </NavigationView.PaneFooter>
 
-            <Frame x:Name="ContentFrame" Margin="24">
+            <Frame x:Name="ContentFrame" Margin="0">
                 <Frame.ContentTransitions>
                     <TransitionCollection>
                         <NavigationThemeTransition/>
@@ -103,12 +85,12 @@
             </Frame>
 
         </NavigationView>
-
+<!--
         <AppBar Grid.Row="1" IsSticky="True">
             <AppBarToggleButton Icon="Like" Label="SymbolIcon"/>
             <AppBarButton Icon="Like" Label="SymbolIcon"/>
             
-        </AppBar>
+        </AppBar>-->
     </Grid>
 
 </Page>
