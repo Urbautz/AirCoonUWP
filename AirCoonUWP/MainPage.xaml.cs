@@ -35,7 +35,7 @@ namespace AirCoonUWP
     /// <summary>
     /// Eine leere Seite, die eigenständig verwendet oder zu der innerhalb eines Rahmens navigiert werden kann.
     /// </summary>
-    public sealed partial class MainPage : Page, // INotifyPropertyChanged
+    public sealed partial class MainPage : Page //, INotifyPropertyChanged
     {
 
         private Compositor _compositor;
@@ -175,7 +175,6 @@ namespace AirCoonUWP
             var item = _pages.First(p => p.Tag.Equals(navItemTag));
             ContentFrame.Navigate(item.Page);
             this._CurrentPageName = navItemName;
-            int i = 1 + 1;
         }
 
         private void MoreClick(object sender, RoutedEventArgs e)

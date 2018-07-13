@@ -134,6 +134,7 @@
     <Compile Include="Game\Handler\DataCsvLoader.cs" />
     <Compile Include="Game\Handler\Debug.cs" />
     <Compile Include="Game\Handler\SaveGame.cs" />
+    <Compile Include="Game\Handler\Tick.cs" />
     <Compile Include="Game\Models\Airport.cs" />
     <Compile Include="Game\Models\Geo\Continent.cs" />
     <Compile Include="Game\Models\Geo\Country.cs" />

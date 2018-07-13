@@ -8,6 +8,7 @@ using Windows.UI.Xaml.Controls;
 using Windows.Storage;
 using AirCoon.Game.Models;
 using AirCoon.Game.Models.Geo;
+using AirCoon.Game.Handler;
 
 
 namespace AirCoon.Game.Handler
@@ -24,44 +25,44 @@ namespace AirCoon.Game.Handler
       readonly static int WeeksPerQuarter = WeeksPerYear / QuartersPerYear;
       readonly static int DaysPerQuarter  = DaysPerYear / QuartersPerYear;
     
-      readonly Int64 Tick;
+      readonly Int64 TickCount;
       
-      public Int HourOfDay {
-         get { return Convert.ToInt32(Tick % HoursPerDay);  }
+      public Int32 HourOfDay {
+         get { return Convert.ToInt32(this.TickCount % HoursPerDay);  }
       }
       
       public Int64 TickDay {
-        get { return Convert.ToInt64(Math.Floor(Tick / HoursPerDay) + 1 );  }
+        get { return Convert.ToInt64(Math.Floor((Decimal) this.TickCount / HoursPerDay) + 1 );  }
       }
 
-      public Int DayOfWeek {
+      public Int32 DayOfWeek {
         get { return Convert.ToInt32(TickDay % DaysPerWeek) + 1; }
       }
 
-      public Int WeekOfYear {
+      public Int32 WeekOfYear {
         get { return Convert.ToInt32(TickDay % WeeksPerYear) + 1; }
       }
       
-      public Int QuarterOfYear {
+      public Int32 QuarterOfYear {
         get { return Convert.ToInt32(TickDay % DaysPerQuarter) + 1; }
       }
     
       public Tick(Tick lastTick, Int64 ToFuture = 1) {
-        this.Tick = lastTick + TuFuture;
-        if(PublicSaveGame.SG.Ticks.ContainsKey(this.Tick)) {
+        this.TickCount = lastTick.TickCount + ToFuture;
+        if(SaveGamePublic.SaveGame.Ticks.ContainsKey(this.TickCount)) {
            TickException e = new TickException("Tick already exisits");
-           e.Data.Add("Tick", PublicSaveGame.SG.Ticks[this.Tick]);
+           e.Data.Add("Tick", SaveGamePublic.SaveGame.Ticks[this.TickCount]);
            }
-        else 
-          PublicSaveGame.SG.Ticks.Add(this.Tick, this);
+        else
+            SaveGamePublic.SaveGame.Ticks.Add(this.TickCount, this);
       } // end Constructor
 
     } // end Class
     
     
-    public class SaveGameException : Exception
+    public class TickException : Exception
     {
-        public SaveGameException(string message)
+        public TickException(string message)
             : base(message)
         {
         }

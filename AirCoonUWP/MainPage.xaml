@@ -9,30 +9,66 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
     <Page.Resources>
         <AcrylicBrush x:Key="Brush60" TintColor="#997ac5ea" BackgroundSource="HostBackdrop" TintOpacity="0.6"/>
-        <AcrylicBrush x:Key="Transparent" TintColor="#997ac5ea" BackgroundSource="HostBackdrop" TintOpacity="0.2"/>
+        <AcrylicBrush x:Key="Brush90" TintColor="#007ac5ea" BackgroundSource="HostBackdrop" TintOpacity="0.9"/>
+        <AcrylicBrush x:Key="Brush20" TintColor="#FF7ac5ea" BackgroundSource="HostBackdrop" TintOpacity="0.2"/>
+        <AcrylicBrush x:Key="Transparent" TintColor="#997ac5ea" BackgroundSource="Backdrop" TintOpacity="0.0"/>
         <Style TargetType="Frame">
             <Setter Property="Background" Value="{StaticResource Brush60}" />
         </Style>
         <Style TargetType="Grid" x:Key="OuterGrid">
             <Setter Property="Background" Value="{StaticResource Transparent}" />
         </Style>
+        <Style TargetType="NavigationView" x:Key="NavView">
+            <Setter Property="Background" Value="{StaticResource Brush60}" />
+        </Style>
     </Page.Resources>
 
 
-    <Grid Style="{StaticResource OuterGrid}">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition></ColumnDefinition>
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*"></RowDefinition>
-            <RowDefinition Height="Auto"></RowDefinition>
-        </Grid.RowDefinitions>
-        <NavigationView x:Name="NavView"
-                        ItemInvoked="Navigate"
-                        Loaded="NavViewLoaded"
-                        BackRequested="NavViewBackRequested">
 
-            <NavigationView.MenuItems>
+        
+    <NavigationView x:Name="NavView"
+                    ItemInvoked="Navigate"
+                    Loaded="NavViewLoaded"
+                    BackRequested="NavViewBackRequested"
+                    Style="{StaticResource NavView}"
+                    >
+
+        <NavigationView.Header>
+            <Grid Margin="24,10,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Name="PageTitle"
+                            Style="{StaticResource TitleTextBlockStyle}"
+                               FontSize="28"
+                               VerticalAlignment="Center"
+                               Text="{Binding _CurrentPageName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            </Grid>
+        </NavigationView.Header>
+
+        <Grid Style="{StaticResource OuterGrid}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="50"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <Frame x:Name="ContentFrame" Margin="0" Grid.Row="0">
+                <Frame.ContentTransitions>
+                    <TransitionCollection>
+                        <NavigationThemeTransition/>
+                    </TransitionCollection>
+                </Frame.ContentTransitions>
+            </Frame>
+            <RelativePanel Grid.Row="1" Background="Red">
+                <TextBlock Text="Commandbar" Height="200"></TextBlock>
+            </RelativePanel>
+        </Grid>
+
+        <NavigationView.MenuItems>
                 <NavigationViewItemHeader Content="Overview"/>
                 <NavigationViewItem x:Uid="WorldNavItem" Icon="Globe" Content="World" Tag="World"/>
                 <NavigationViewItem x:Uid="AirlineDetailsItem" Icon="Home" Content="My Airline" Tag="AirlineDetails"/>
@@ -56,33 +92,17 @@
                         <FontIcon Glyph="&#xE1D0;"/>
                     </NavigationViewItem.Icon>
                 </NavigationViewItem>
-                <NavigationViewItem x:Uid="HumanResourcesItem" Icon="People" Content="Human Resources" Tag="HR" />
+                <NavigationViewItem x:Uid="StaffsItem" Icon="People" Content="Staff" Tag="Staff" />
                 <NavigationViewItem x:Uid="MarketingItem" Icon="LikeDislike" Content="Marketing" Tag="Marketing" />
             </NavigationView.MenuItems>
 
 
-            <NavigationView.Header>
-                <Grid Margin="24,10,0,0">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition/>
-                    </Grid.ColumnDefinitions>
-                    <TextBlock Name="PageTitle"
-                            Style="{StaticResource TitleTextBlockStyle}"
-                               FontSize="28"
-                               VerticalAlignment="Center"
-                               Text="{Binding _CurrentPageName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                </Grid>
-            </NavigationView.Header>
 
 
-            <Frame x:Name="ContentFrame" Margin="0">
-                <Frame.ContentTransitions>
-                    <TransitionCollection>
-                        <NavigationThemeTransition/>
-                    </TransitionCollection>
-                </Frame.ContentTransitions>
-            </Frame>
+
+
+            
+            
 
         </NavigationView>
 <!--
@@ -91,6 +111,5 @@
             <AppBarButton Icon="Like" Label="SymbolIcon"/>
             
         </AppBar>-->
-    </Grid>
 
 </Page>
