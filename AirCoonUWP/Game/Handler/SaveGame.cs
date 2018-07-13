@@ -26,7 +26,9 @@ namespace AirCoon.Game.Handler
         public Dictionary<String, Country> Countries = new Dictionary<String, Country>();
         public Dictionary<String, Region> Regions = new Dictionary<String, Region>();
         public Dictionary<String, Airport> Airports = new Dictionary<string, Airport>();
-
+        
+        
+        public Dictionary<Int64, Tick> Ticks = new Dictionary<Int64, Tick>();
         /*
          
          */
