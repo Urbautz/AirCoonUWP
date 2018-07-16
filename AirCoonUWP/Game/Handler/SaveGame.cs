@@ -136,7 +136,7 @@ namespace AirCoon.Game.Handler
             // Check letters
             string pattern = @"^[a-zA-Z]+$";
             Regex regex = new Regex(pattern);
-            if (!regex.IsMatch(name))
+            if (!regex.IsMatch(code))
             {
                 throw new SaveGameException("Code " + code + " is not valid.");
             }
@@ -336,6 +336,7 @@ namespace AirCoon.Game.Handler
     {
         public static SaveGame SaveGame;
         public static Page OuterFrame;
+        public static TickHandler TickHandler;
     }
 
     public class SaveGameException : Exception

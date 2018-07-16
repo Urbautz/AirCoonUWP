@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Collections.Specialized;
 using Windows.ApplicationModel.Core;
 using Windows.System;
+using Windows.Foundation;
 using Windows.UI;
 using Windows.UI.Composition;
 using Windows.UI.ViewManagement;
@@ -57,17 +58,23 @@ namespace AirCoonUWP
 
         };
         private String _CurrentPageName = "Welcome";
-        
 
+        private TickHandler TickHandler;
+
+
+        // Constructor
         public MainPage()
         {
+
 
             InitializeComponent();
             Loaded += PageOnLoaded;
             this.SaveGameDialogAsync();
             SaveGamePublic.OuterFrame = this;
+            SaveGamePublic.TickHandler = new TickHandler();
+            this.TickHandler = SaveGamePublic.TickHandler;
             this.NavViewNavigate("World", "Welcome");
-        } // en constructor
+        } // end constructor
 
         public async void SaveGameDialogAsync()
         {
@@ -188,6 +195,17 @@ namespace AirCoonUWP
             //OuterFrame.Content = p;
         } // End SetFrameContent
 
+
+        private void ClickIncreaseSpeed(object sender, RoutedEventArgs e)
+        {
+            this.TickHandler.IncreaseSpeed();
+            
+        }
+
+        private void ClickDecreaseSpeed(object sender, RoutedEventArgs e)
+        {
+            this.TickHandler.DecreaseSpeed();
+        }
     } // End Class
 
 
