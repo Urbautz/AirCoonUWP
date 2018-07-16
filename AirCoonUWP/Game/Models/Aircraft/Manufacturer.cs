@@ -33,7 +33,12 @@ namespace AirCoon.Game.Models.Aircraft
            }
            this.OrderBook = new Queue();
            this._AircraftInStock = new List<Aircraft>;
-        }
+        } // end Constructor
+        
+        public Manufacturer(SerializationInfo info, StreamingContext ctxt) {
+          this.Name = info.GetString("Name');
+          blablah missing
+        } // End Deserializer
     
     } // End Class
 } // End Namespace
