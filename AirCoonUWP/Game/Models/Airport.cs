@@ -12,7 +12,7 @@ namespace AirCoon.Game.Models
 {
     [Serializable]
     public class Airport
-        : ISerializable, IAmTickable;
+        : ISerializable, IAmTickable
     {
         readonly String Iata;
         readonly String Icao;
@@ -109,22 +109,22 @@ namespace AirCoon.Game.Models
 
         } // end serializer
         
-        void MiniTick(Tick CurrentTick, int MiniTick){
+        public void MiniTick(Tick CurrentTick, int MiniTick){
         } // End Minitick
         
-        void Tick(Tick CurrentTick){
+        public void Tick(Tick CurrentTick){
         } // End Tick
-        
-        void DailyTick(Tick CurrentTick){
+
+        public void DailyTick(Tick CurrentTick){
         } // End DailyTick
-        
-        void WeeklyTick(Tick CurrentTick){
+
+        public void WeeklyTick(Tick CurrentTick){
         } // End WeeklyTick
-        
-        void QuarterlyTick(Tick CurrentTick){
+
+        public void QuarterlyTick(Tick CurrentTick){
         } // End QuarterlyTick
-        
-        void YearlyTick(Tick CurrentTick){
+
+        public void YearlyTick(Tick CurrentTick){
         } // End YearlyTick
 
     } // End class
