@@ -13,6 +13,14 @@ using AirCoon.Game.Handler;
 
 namespace AirCoon.Game.Handler
 {
+    interface IAmTickable {
+        void MiniTick(Tick CurrentTick, int MiniTick);
+        void Tick(Tick CurrentTick);
+        void DailyTick(Tick CurrentTick);
+        void WeeklyTick(Tick CurrentTick);
+        void QuarterlyTick(Tick CurrentTick);
+        void YearlyTick(Tick CurrentTick);
+    }
 
     public class Tick {
     
