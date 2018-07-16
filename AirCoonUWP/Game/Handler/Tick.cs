@@ -14,6 +14,17 @@ using System.Runtime.CompilerServices;
 
 namespace AirCoon.Game.Handler
 {
+
+    interface IAmTickable {
+        void MiniTick(Tick CurrentTick, int MiniTick);
+        void Tick(Tick CurrentTick);
+        void DailyTick(Tick CurrentTick);
+        void WeeklyTick(Tick CurrentTick);
+        void QuarterlyTick(Tick CurrentTick);
+        void YearlyTick(Tick CurrentTick);
+    } // End Interface
+
+
     public class  TickHandler : INotifyPropertyChanged
     {
 
@@ -72,6 +83,7 @@ namespace AirCoon.Game.Handler
         public bool DoTick = false;
 
         public TickHandler() { }
+
 
 
 
