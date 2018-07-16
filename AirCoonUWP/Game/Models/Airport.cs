@@ -12,7 +12,7 @@ namespace AirCoon.Game.Models
 {
     [Serializable]
     public class Airport
-        : ISerializable
+        : ISerializable, IAmTickable;
     {
         readonly String Iata;
         readonly String Icao;
@@ -89,7 +89,7 @@ namespace AirCoon.Game.Models
             this.Slots = info.GetInt16("Slots");
             this._TotalPassengers = info.GetInt32("TotalPassengers");
 
-        }
+        } // End Deserializer
 
         // Serializer
         public void GetObjectData(SerializationInfo info, StreamingContext ctxt)
@@ -107,7 +107,25 @@ namespace AirCoon.Game.Models
             info.AddValue("Slots", this.Slots);
             info.AddValue("TotalPassengers", this._TotalPassengers);
 
-        }
+        } // end serializer
+        
+        void MiniTick(Tick CurrentTick, int MiniTick){
+        } // End Minitick
+        
+        void Tick(Tick CurrentTick){
+        } // End Tick
+        
+        void DailyTick(Tick CurrentTick){
+        } // End DailyTick
+        
+        void WeeklyTick(Tick CurrentTick){
+        } // End WeeklyTick
+        
+        void QuarterlyTick(Tick CurrentTick){
+        } // End QuarterlyTick
+        
+        void YearlyTick(Tick CurrentTick){
+        } // End YearlyTick
 
     } // End class
 }// ENd namespace
