@@ -9,13 +9,77 @@ using Windows.Storage;
 using AirCoon.Game.Models;
 using AirCoon.Game.Models.Geo;
 using AirCoon.Game.Handler;
-
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 
 namespace AirCoon.Game.Handler
 {
+    public class  TickHandler : INotifyPropertyChanged
+    {
+
+        public event PropertyChangedEventHandler PropertyChanged = delegate { };
+        protected void OnPropertyChanged(string name)
+        {
+            PropertyChangedEventHandler Handler = PropertyChanged;
+            if (Handler != null)
+            {
+                Handler(this, new PropertyChangedEventArgs(name));
+            }
+        }
+
+        private int _TickSpeed = 2;
+        public int TickSpeed
+        {
+            get { return _TickSpeed; }
+            set
+            {
+                _TickSpeed = value;
+                this.TickSpeedString = value.ToString();
+                //this.OnPropertyChanged("TickSpeed");
+            }
+
+        }
+        
+        private String _TickSpeedString = "Speed: 2";
+        public String TickSpeedString
+        {
+            get { return _TickSpeedString; }
+            set
+            {
+                    _TickSpeedString = "Speed: " + value;
+                    this.OnPropertyChanged("TickSpeedString");
+
+            }
+        }
+
+        public void IncreaseSpeed()
+        {
+            if (this._TickSpeed < 4)
+            {
+                this.TickSpeed = this.TickSpeed + 1;
+                
+            }
+        }
+        public void DecreaseSpeed()
+        {
+            if (this._TickSpeed > 1)
+            {
+                this.TickSpeed = this.TickSpeed - 1;
+            }
+        }
+
+        private bool _DoTick = false;
+        public bool DoTick = false;
+
+        public TickHandler() { }
+
+
+
+    }
 
     public class Tick {
-    
+     
+
       readonly static int HoursPerDay     = 24;
       readonly static int DaysPerWeek     = 7;
       readonly static int WeeksPerYear    = 52;
