@@ -33,8 +33,14 @@ namespace AirCoon.Game.Models.Aircraft
            }
            this.OrderBook = new Queue();
            this._AircraftInStock = new List<Aircraft>;
+
         } // End Constructor
         
+        
+        public Manufacturer(SerializationInfo info, StreamingContext ctxt) {
+          this.Name = info.GetString("Name');
+          blablah missing
+        } // End Deserializer
         
         
          void MiniTick(Tick CurrentTick, int MiniTick){
@@ -54,5 +60,6 @@ namespace AirCoon.Game.Models.Aircraft
         
         void YearlyTick(Tick CurrentTick){
         } // End YearlyTick
+          
     } // End Class
 } // End Namespace
