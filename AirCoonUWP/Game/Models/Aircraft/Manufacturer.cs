@@ -13,7 +13,7 @@ namespace AirCoon.Game.Models.Aircraft
 {
     [Serializable()]
     public class Manufacturer
-        : ISerializable
+        : ISerializable, IAmTickable
     {
     
         readonly String Name;
@@ -33,12 +33,33 @@ namespace AirCoon.Game.Models.Aircraft
            }
            this.OrderBook = new Queue();
            this._AircraftInStock = new List<Aircraft>;
-        } // end Constructor
+
+        } // End Constructor
+        
         
         public Manufacturer(SerializationInfo info, StreamingContext ctxt) {
           this.Name = info.GetString("Name');
           blablah missing
         } // End Deserializer
-    
+        
+        
+         void MiniTick(Tick CurrentTick, int MiniTick){
+        } // End Minitick
+        
+        void Tick(Tick CurrentTick){
+        } // End Tick
+        
+        void DailyTick(Tick CurrentTick){
+        } // End DailyTick
+        
+        void WeeklyTick(Tick CurrentTick){
+        } // End WeeklyTick
+        
+        void QuarterlyTick(Tick CurrentTick){
+        } // End QuarterlyTick
+        
+        void YearlyTick(Tick CurrentTick){
+        } // End YearlyTick
+          
     } // End Class
 } // End Namespace
