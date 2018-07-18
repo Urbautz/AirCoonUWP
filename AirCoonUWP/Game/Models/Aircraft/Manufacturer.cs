@@ -1,7 +1,7 @@
 
 using System;
 using System.Collections.Generic;
-using System.Collections.Queue;
+using System.Collections;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,10 +16,10 @@ namespace AirCoon.Game.Models.Aircraft
         : ISerializable, IAmTickable
     {
     
-        readonly String Name;
+        public String Name;
         private List<ProductionLine> ProductionLines;
         private Queue<Plane> OrderBook;
-        private List<Plane> _PlaneInStock;
+        private List<Plane> _PlanesInStock;
         public List<Plane> PlanesInStock {
             get { return _PlanesInStock; }
         }
@@ -28,27 +28,27 @@ namespace AirCoon.Game.Models.Aircraft
         public Manufacturer(String name, int productionlines, int capacity) 
         {
            this.Name = name;
-           ProductionLines = new List<ProductionLine>;
+           ProductionLines = new List<ProductionLine>();
            for (int i=0;i<productionlines;i++) {
-             ProductionLines.add(new ProductionLine(this, capacity));
+             ProductionLines.Add(new ProductionLine(this, capacity));
            }
-           this.OrderBook = new Queue();
-           this._PlanesInStock = new List<Plane>;
+           this.OrderBook = new Queue<Plane>();
+           this._PlanesInStock = new List<Plane>();
 
         } // End Constructor
         
         
         public Manufacturer(SerializationInfo info, StreamingContext ctxt) 
         {
-          this.Name = info.GetString("Name');
-          this.ProductionLines = (List<ProductionLine>) info.GetValue("ProductionLines", typeof(List<ProductionLine>));
+            this.Name = info.GetString("Name");
+            this.ProductionLines = (List<ProductionLine>) info.GetValue("ProductionLines", typeof(List<ProductionLine>));
           
-          this.OrderBook = new Queue();
-          List<Plane> temp = (List<Plane>) info.GetValue("OrderBook", typeof(List<Plane>)) )
-          foreach (Plane p in temp) {
-              this.Orderbook.enqueue(p);
-          }
-          this.PlanesInStock = (List<Plane>) info.GetValue("PlanesInStock", typeof(List<Planes>));
+            this.OrderBook = new Queue<Plane>();
+            List<Plane> temp = (List<Plane>)info.GetValue("OrderBook", typeof(List<Plane>)); 
+            foreach (Plane p in temp) {
+                this.OrderBook.Enqueue(p);
+            }
+            this._PlanesInStock = (List<Plane>) info.GetValue("PlanesInStock", typeof(List<Plane>));
           
         } // End Deserializer
         
@@ -56,27 +56,27 @@ namespace AirCoon.Game.Models.Aircraft
         public void GetObjectData(SerializationInfo info, StreamingContext ctxt)
         {
             info.AddValue("Name", this.Name);
-            info.Addvalue("ProductionLines", this.ProductionLines);
+            info.AddValue("ProductionLines", this.ProductionLines);
             info.AddValue("OrderBook", this.OrderBook.ToList() );
             info.AddValue("PlanesInStock", this.PlanesInStock);
         }
         
-         void MiniTick(Tick CurrentTick, int MiniTick){
+        public void MiniTick(Tick CurrentTick, int MiniTick){
         } // End Minitick
-        
-        void Tick(Tick CurrentTick){
+
+        public void Tick(Tick CurrentTick){
         } // End Tick
-        
-        void DailyTick(Tick CurrentTick){
+
+        public void DailyTick(Tick CurrentTick){
         } // End DailyTick
-        
-        void WeeklyTick(Tick CurrentTick){
+
+        public void WeeklyTick(Tick CurrentTick){
         } // End WeeklyTick
-        
-        void QuarterlyTick(Tick CurrentTick){
+
+        public void QuarterlyTick(Tick CurrentTick){
         } // End QuarterlyTick
-        
-        void YearlyTick(Tick CurrentTick){
+
+        public void YearlyTick(Tick CurrentTick){
         } // End YearlyTick
           
     } // End Class

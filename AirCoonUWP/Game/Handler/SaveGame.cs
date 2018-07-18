@@ -8,6 +8,7 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using AirCoon.Game.Models;
 using AirCoon.Game.Models.Geo;
+using AirCoon.Game.Models.Aircraft;
 using Windows.Storage;
 
 namespace AirCoon.Game.Handler
@@ -26,6 +27,7 @@ namespace AirCoon.Game.Handler
         public Dictionary<String, Country> Countries = new Dictionary<String, Country>();
         public Dictionary<String, Region> Regions = new Dictionary<String, Region>();
         public Dictionary<String, Airport> Airports = new Dictionary<string, Airport>();
+        public Dictionary<String, Manufacturer> Manufacturers = new Dictionary<string, Manufacturer>();
         
         
         public Dictionary<Int64, Tick> Ticks = new Dictionary<Int64, Tick>();

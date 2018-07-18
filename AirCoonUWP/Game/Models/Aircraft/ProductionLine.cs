@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using System.Collections.Queue;
+using System.Collections;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,7 +21,11 @@ namespace AirCoon.Game.Models.Aircraft
         public int Progress {
             get { return _Progress;}
         }
-        private Plane PlaneWIP = null;
+        private Plane _PlaneWIP = null;
+        public Plane PlaneWIP
+        {
+            get { return _PlaneWIP; }
+        }
             
         
         public ProductionLine(Manufacturer manufacturer, int capacity) {
@@ -29,8 +33,8 @@ namespace AirCoon.Game.Models.Aircraft
            this.Manufacturer = manufacturer;
         } // end Constructor
         
-        public ProductionLIne(SerializationInfo info, StreamingContext ctxt) {
-          m = info.GetString("Manufacturer");  
+        public ProductionLine(SerializationInfo info, StreamingContext ctxt) {
+          String m = info.GetString("Manufacturer");  
           this.Manufacturer = SaveGamePublic.SaveGame.Manufacturers[m];
           this.Capacity = info.GetInt32("Capacity");
           this._Progress = info.GetInt32("Progress");
@@ -52,11 +56,41 @@ namespace AirCoon.Game.Models.Aircraft
         } // end GetObjectData
 
         public bool StartPlaneBuild(Plane plane) {
-             if(this.PlaneWIP == null) {
-                  this.PlaneWIP = ac;
+             if(this._PlaneWIP == null) {
+                  this._PlaneWIP = plane;
                   return true;
              } 
              return false;
         }// end StartPlanebuild
+
+        public void MiniTick(Tick CurrentTick, int MiniTick)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Tick(Tick CurrentTick)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void DailyTick(Tick CurrentTick)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void WeeklyTick(Tick CurrentTick)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void QuarterlyTick(Tick CurrentTick)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void YearlyTick(Tick CurrentTick)
+        {
+            throw new NotImplementedException();
+        }
     } // End Class
 } // End Namespace
