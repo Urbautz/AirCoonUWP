@@ -5,54 +5,43 @@ using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 using AirCoon.Game.Handler;
-using AirCoon.Game.Models;
-using AirCoon.Game.Models.Aircraft;
 
 namespace AirCoonUWP.Game.Models.Airline
 {
-    [Serializable]
-    public class Fleet
-                : ISerializable, IAmTickable
+    class PlayerAirline
+        : Airline
     {
-
-
-
-        public Fleet()
-        {
-
-        }
-
-        public void GetObjectData(SerializationInfo info, StreamingContext context)
+        public override void DailyTick(Tick CurrentTick)
         {
             throw new NotImplementedException();
         }
 
-        void IAmTickable.DailyTick(Tick CurrentTick)
+        public override void GetObjectData(SerializationInfo info, StreamingContext context)
         {
             throw new NotImplementedException();
         }
 
-        void IAmTickable.MiniTick(Tick CurrentTick, int MiniTick)
+        public override void MiniTick(Tick CurrentTick, int MiniTick)
         {
             throw new NotImplementedException();
         }
 
-        void IAmTickable.QuarterlyTick(Tick CurrentTick)
+        public override void QuarterlyTick(Tick CurrentTick)
         {
             throw new NotImplementedException();
         }
 
-        void IAmTickable.Tick(Tick CurrentTick)
+        public override void Tick(Tick CurrentTick)
         {
             throw new NotImplementedException();
         }
 
-        void IAmTickable.WeeklyTick(Tick CurrentTick)
+        public override void WeeklyTick(Tick CurrentTick)
         {
             throw new NotImplementedException();
         }
 
-        void IAmTickable.YearlyTick(Tick CurrentTick)
+        public override void YearlyTick(Tick CurrentTick)
         {
             throw new NotImplementedException();
         }
