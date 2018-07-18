@@ -17,31 +17,49 @@ namespace AirCoon.Game.Models.Aircraft
     {
     
         readonly String Name;
-        private ProductionLine[] ProductionLines;
-        private Queue OrderBook;
-        private List<Aircraft> _AircraftInStock;
-        public List<Aircraft> AircraftInStock {
-            get { return _AircraftInStock;}
+        private List<ProductionLine> ProductionLines;
+        private Queue<Plane> OrderBook;
+        private List<Plane> _PlaneInStock;
+        public List<Plane> PlanesInStock {
+            get { return _PlanesInStock; }
         }
             
         
-        public Manufacturer(String name, int productionlines, int capacity) {
+        public Manufacturer(String name, int productionlines, int capacity) 
+        {
            this.Name = name;
-           ProductionLines[] = new ProductionLine[productionlines]
+           ProductionLines = new List<ProductionLine>;
            for (int i=0;i<productionlines;i++) {
-             ProductionLines[i] = new ProductionLine(this, capacity);
+             ProductionLines.add(new ProductionLine(this, capacity));
            }
            this.OrderBook = new Queue();
-           this._AircraftInStock = new List<Aircraft>;
+           this._PlanesInStock = new List<Plane>;
 
         } // End Constructor
         
         
-        public Manufacturer(SerializationInfo info, StreamingContext ctxt) {
+        public Manufacturer(SerializationInfo info, StreamingContext ctxt) 
+        {
           this.Name = info.GetString("Name');
-          blablah missing
+          this.ProductionLines = (List<ProductionLine>) info.GetValue("ProductionLines", typeof(List<ProductionLine>));
+          
+          this.OrderBook = new Queue();
+          List<Plane> temp = (List<Plane>) info.GetValue("OrderBook", typeof(List<Plane>)) )
+          foreach (Plane p in temp) {
+              this.Orderbook.enqueue(p);
+          }
+          this.PlanesInStock = (List<Plane>) info.GetValue("PlanesInStock", typeof(List<Planes>));
+          
         } // End Deserializer
         
+        // Serialiszer
+        public void GetObjectData(SerializationInfo info, StreamingContext ctxt)
+        {
+            info.AddValue("Name", this.Name);
+            info.Addvalue("ProductionLines", this.ProductionLines);
+            info.AddValue("OrderBook", this.OrderBook.ToList() );
+            info.AddValue("PlanesInStock", this.PlanesInStock);
+        }
         
          void MiniTick(Tick CurrentTick, int MiniTick){
         } // End Minitick
