@@ -16,9 +16,21 @@ namespace AirCoon.Game.Models.Aircraft
         : ISerializable, IAmTickable
     {
     
-        public String Name;
+        private String _Name;
+        public String Name
+        {
+            get { return _Name; }
+        }
+
         private List<ProductionLine> ProductionLines;
-        private Queue<Plane> OrderBook;
+        // only private
+
+        private Queue<Plane> _OrderBook;
+        public Queue<Plane> Orderbook
+        {
+            get { return _OrderBook; }
+        }
+
         private List<Plane> _PlanesInStock;
         public List<Plane> PlanesInStock {
             get { return _PlanesInStock; }
@@ -27,12 +39,12 @@ namespace AirCoon.Game.Models.Aircraft
         
         public Manufacturer(String name, int productionlines, int capacity) 
         {
-           this.Name = name;
+           this._Name = name;
            ProductionLines = new List<ProductionLine>();
            for (int i=0;i<productionlines;i++) {
              ProductionLines.Add(new ProductionLine(this, capacity));
            }
-           this.OrderBook = new Queue<Plane>();
+           this._OrderBook = new Queue<Plane>();
            this._PlanesInStock = new List<Plane>();
 
         } // End Constructor
@@ -40,13 +52,13 @@ namespace AirCoon.Game.Models.Aircraft
         
         public Manufacturer(SerializationInfo info, StreamingContext ctxt) 
         {
-            this.Name = info.GetString("Name");
+            this._Name = info.GetString("Name");
             this.ProductionLines = (List<ProductionLine>) info.GetValue("ProductionLines", typeof(List<ProductionLine>));
           
-            this.OrderBook = new Queue<Plane>();
+            this._OrderBook = new Queue<Plane>();
             List<Plane> temp = (List<Plane>)info.GetValue("OrderBook", typeof(List<Plane>)); 
             foreach (Plane p in temp) {
-                this.OrderBook.Enqueue(p);
+                this._OrderBook.Enqueue(p);
             }
             this._PlanesInStock = (List<Plane>) info.GetValue("PlanesInStock", typeof(List<Plane>));
           
@@ -57,7 +69,7 @@ namespace AirCoon.Game.Models.Aircraft
         {
             info.AddValue("Name", this.Name);
             info.AddValue("ProductionLines", this.ProductionLines);
-            info.AddValue("OrderBook", this.OrderBook.ToList() );
+            info.AddValue("OrderBook", this._OrderBook.ToList() );
             info.AddValue("PlanesInStock", this.PlanesInStock);
         }
         

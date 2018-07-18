@@ -8,7 +8,7 @@ using AirCoon.Game.Handler;
 
 namespace AirCoonUWP.Game.Models.Airline
 {
-    class EnemyAirline
+    public class EnemyAirline
         : Airline
     {
 

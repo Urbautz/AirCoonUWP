@@ -139,7 +139,10 @@
     <Compile Include="Game\Models\Aircraft\Manufacturer.cs" />
     <Compile Include="Game\Models\Aircraft\Plane.cs" />
     <Compile Include="Game\Models\Aircraft\ProductionLine.cs" />
+    <Compile Include="Game\Models\Airline\Airline.cs" />
+    <Compile Include="Game\Models\Airline\EnemyAirline.cs" />
     <Compile Include="Game\Models\Airline\Fleet.cs" />
+    <Compile Include="Game\Models\Airline\PlayerAirline.cs" />
     <Compile Include="Game\Models\Airport.cs" />
     <Compile Include="Game\Models\Geo\Continent.cs" />
     <Compile Include="Game\Models\Geo\Country.cs" />

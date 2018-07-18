@@ -14,32 +14,49 @@ using System.Runtime.Serialization.Formatters.Binary;
 
 namespace AirCoon.Game.Models.Aircraft
 {
+
+    public enum PlaneState
+    {
+        Ordered,
+        InProduction,
+        Maintenance,
+        Idle,
+        Preparation,
+        Boarding,
+        TaxiToRunway,
+        Takeoff,
+        InFlight,
+        Approach,
+        TaxitoTerminal,
+        DeBoarding
+    }
+
     [Serializable()]
     public class Plane 
         : ISerializable, IAmTickable
     {
-        
-        public enum States {
-          Ordered,
-          InProduction,
-          Maintenance,
-          Idle,
-          Preparation,
-          Boarding,
-          TaxiToRunway,
-          Takeoff,
-          InFlight,
-          Approach,
-          TaxitoTerminal,
-          DeBoarding
-        }
-        
+
         readonly Aircraft Aircraft;
+
         private Fleet _Fleet;
         public Fleet Fleet {
           get { return _Fleet; }
           set { this._Fleet = value; }
         }
+
+        private PlaneState _PlaneState;
+        public PlaneState PlaneState
+        {
+            get { return _PlaneState; }
+        }
+
+        private Airport _Position;
+        public Airport Position
+        {
+            get { return _Position; }
+        }
+
+
 
         public void GetObjectData(SerializationInfo info, StreamingContext context)
         {

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace AirCoonUWP.Game.Models.Airline
 {
     [Serializable]
-    abstract class Airline
+    public abstract class Airline
                 : ISerializable, IAmTickable
     {
 

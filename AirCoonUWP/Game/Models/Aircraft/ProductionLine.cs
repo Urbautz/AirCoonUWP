@@ -17,22 +17,25 @@ namespace AirCoon.Game.Models.Aircraft
     
         readonly Manufacturer Manufacturer;
         readonly int Capacity;
+
         private int _Progress;
         public int Progress {
             get { return _Progress;}
         }
+
         private Plane _PlaneWIP = null;
         public Plane PlaneWIP
         {
             get { return _PlaneWIP; }
         }
             
-        
+        // Constructor
         public ProductionLine(Manufacturer manufacturer, int capacity) {
            this.Capacity = capacity;
            this.Manufacturer = manufacturer;
         } // end Constructor
         
+        // Deserialsizer
         public ProductionLine(SerializationInfo info, StreamingContext ctxt) {
           String m = info.GetString("Manufacturer");  
           this.Manufacturer = SaveGamePublic.SaveGame.Manufacturers[m];

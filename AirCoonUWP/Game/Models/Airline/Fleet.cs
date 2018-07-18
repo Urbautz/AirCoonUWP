@@ -15,6 +15,17 @@ namespace AirCoonUWP.Game.Models.Airline
                 : ISerializable, IAmTickable
     {
 
+        private String _Name;
+        public String Name
+        {
+            get { return _Name; }
+        }
+
+        private Airline _Airline;
+        public Airline Airline
+        {
+            get { return _Airline; }
+        }
 
 
         public Fleet()

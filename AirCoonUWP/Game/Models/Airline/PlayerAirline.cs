@@ -8,7 +8,7 @@ using AirCoon.Game.Handler;
 
 namespace AirCoonUWP.Game.Models.Airline
 {
-    class PlayerAirline
+    public class PlayerAirline
         : Airline
     {
         public override void DailyTick(Tick CurrentTick)
