@@ -258,8 +258,20 @@ namespace AirCoon.Game.Handler
 
 
                 line = csv.GetNextLine();
-            }
-
+            } // End Load Airports
+            
+            Debug.Write("Loading Manufacturers",3);
+            StreamReader stream = new StreamReader(ConfigPath + "\\airports.dat");
+            DataCsvLoader csv = new DataCsvLoader(stream, false,true);
+            Dictionary<string,string> line = csv.GetNextLineHeaders();
+            while (line != null)
+            {
+                Manufacturer M = new Manufacturer(line["Manufacturer"], 
+                                                  line["Parallel"],
+                                                  line["PointsPerDay"]
+                                                 );
+                line = csv.GetNextLineHeaders();
+             }
 
 
             Debug.Write("Load complete", 1);
@@ -321,13 +333,26 @@ namespace AirCoon.Game.Handler
                 bformatter.Serialize(stream, this.Airports);
                 stream.Close();
             }
-
-            // Loadtest Region
-            this.Airports = null;
+            // Loadtest Airport
+            /*this.Airports = null;
             Stream stream2 = File.Open(this.ConcreteSaveGameFolder + "\\airports.dat", FileMode.Open);
             this.Airports = (Dictionary<string, Airport>)bformatter.Deserialize(stream2);
             Debug.Write("Regionloader test: " + this.Airports["FRA"].Size);
+            Console.ReadLine();*/
+            
+            Debug.Write("Saving Manufacturers", 2);
+                        using (Stream stream = File.Open(this.ConcreteSaveGameFolder + "\\manufacturers.dat", FileMode.Create))
+            {
+                bformatter.Serialize(stream, this.Manufacturers);
+                stream.Close();
+            }
+            //Loadtest Manufacturers
+            this.Manufacturers = null;
+            Stream stream2 = File.Open(this.ConcreteSaveGameFolder + "\\Manufacturers.dat", FileMode.Open);
+            this.Manufacturers = (Dictionary<string, Manufacturers>)bformatter.Deserialize(stream2);
+            Debug.Write("Manufacturerloader test: " + this.Manufacturer["FRA"].Size);
             Console.ReadLine();
+
 
             Debug.Write("Saved!", 1);
         }
