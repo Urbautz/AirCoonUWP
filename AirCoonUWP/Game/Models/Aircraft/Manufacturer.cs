@@ -46,7 +46,7 @@ namespace AirCoon.Game.Models.Aircraft
            }
            this._OrderBook = new Queue<Plane>();
            this._PlanesInStock = new List<Plane>();
-
+           SaveGamePublic.SaveGame.Manufacturers.Add(this.Name, this);
         } // End Constructor
         
         
