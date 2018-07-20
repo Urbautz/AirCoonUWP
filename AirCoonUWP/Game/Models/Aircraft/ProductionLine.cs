@@ -15,7 +15,12 @@ namespace AirCoon.Game.Models.Aircraft
         : ISerializable, IAmTickable
     {
     
-        readonly Manufacturer Manufacturer;
+        private String _ManufacturerName;
+        public Manufacturer Manufacturer
+        {
+            get { return SaveGamePublic.SaveGame.Manufacturers[_ManufacturerName]; }
+        }
+
         readonly int Capacity;
 
         private int _Progress;
@@ -32,21 +37,21 @@ namespace AirCoon.Game.Models.Aircraft
         // Constructor
         public ProductionLine(Manufacturer manufacturer, int capacity) {
            this.Capacity = capacity;
-           this.Manufacturer = manufacturer;
+           this._ManufacturerName = manufacturer.Name;
         } // end Constructor
         
         // Deserialsizer
         public ProductionLine(SerializationInfo info, StreamingContext ctxt) {
-          String m = info.GetString("Manufacturer");  
-          this.Manufacturer = SaveGamePublic.SaveGame.Manufacturers[m];
-          this.Capacity = info.GetInt32("Capacity");
-          this._Progress = info.GetInt32("Progress");
-          try 
-          {
-            this._PlaneWIP = (Plane)info.GetValue("PlaneWIP", typeof(Plane));
-          } catch (Exception e) {
-            this._PlaneWIP = null;
-          }
+          
+            this._ManufacturerName = info.GetString("Manufacturer");
+            this.Capacity = info.GetInt32("Capacity");
+            this._Progress = info.GetInt32("Progress");
+            try 
+            {
+                this._PlaneWIP = (Plane)info.GetValue("PlaneWIP", typeof(Plane));
+            } catch (Exception e) {
+                this._PlaneWIP = null;
+            }
         }// End Deserializer
     
         // Serialiszer

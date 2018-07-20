@@ -68,7 +68,7 @@ namespace AirCoonUWP.Game.Controller.SaveGame
                                                       Code.Text,
                                                       Name.Text
                                                       );
-                int i = 1;
+
             } catch (SaveGameException e) {
                 DialogNewGame dialog = new DialogNewGame(Name.Text, Code.Text, 
                                                     selected.Tag.ToString(),
