@@ -10,6 +10,7 @@ using AirCoon.Game.Models;
 using AirCoon.Game.Models.Geo;
 using AirCoon.Game.Models.Aircraft;
 using Windows.Storage;
+using AirCoonUWP.Game.Models.Geo;
 
 namespace AirCoon.Game.Handler
 {
@@ -253,6 +254,27 @@ namespace AirCoon.Game.Handler
 
                 line = csv.GetNextLine();
             } // End Load Airports
+
+            // Creating Connections
+            foreach(KeyValuePair<String,Airport> a in this.Airports)
+            {
+                if (a.Value.Iata == "FRA")
+                {
+                    foreach (KeyValuePair<String, Airport> b in this.Airports)
+                    {
+                        if (b.Value.TotalPassengers > 50000)
+                        {
+
+                            Connection C = new Connection(a.Value, b.Value, ConnectionType.Ground);
+                            double d = C.Distance;
+                            double m = d / 1.6;
+                            String n1 = C.Airport1.Name;
+                            String n2 = C.Airport2.Name;
+                            C = null;
+                        }
+                    }
+                }
+            }
             
             // Loading Manufacturers
             Debug.Write("Loading Manufacturers",3);

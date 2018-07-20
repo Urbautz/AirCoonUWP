@@ -144,6 +144,7 @@
     <Compile Include="Game\Models\Airline\Fleet.cs" />
     <Compile Include="Game\Models\Airline\PlayerAirline.cs" />
     <Compile Include="Game\Models\Airport.cs" />
+    <Compile Include="Game\Models\Geo\Connection.cs" />
     <Compile Include="Game\Models\Geo\Continent.cs" />
     <Compile Include="Game\Models\Geo\Country.cs" />
     <Compile Include="Game\Models\Geo\GeoCoordinate.cs" />
