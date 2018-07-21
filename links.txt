@@ -2,3 +2,5 @@ https://docs.microsoft.com/en-us/uwp/api/windows.ui.xaml.controls.contentdialog
 
 http://www.wpf-tutorial.com/list-controls/itemscontrol/
 
+Abstrakte Klassen Types:
+http://www.net-informations.com/q/faq/type.html
