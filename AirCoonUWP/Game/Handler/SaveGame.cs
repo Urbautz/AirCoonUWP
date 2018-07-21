@@ -9,8 +9,7 @@ using Windows.UI.Xaml.Controls;
 using AirCoon.Game.Models;
 using AirCoon.Game.Models.Geo;
 using AirCoon.Game.Models.Aircraft;
-using Windows.Storage;
-using AirCoonUWP.Game.Models.Geo;
+using AirCoon.Game.Models.Routing;
 
 namespace AirCoon.Game.Handler
 {
@@ -32,6 +31,10 @@ namespace AirCoon.Game.Handler
         public Dictionary<String, Aircraft> Aircrafts = new Dictionary<string, Aircraft>();
 
         public Dictionary<Int64, Tick> Ticks = new Dictionary<Int64, Tick>();
+
+        public Dictionary<String, Connection> Connections = new Dictionary<String, Connection>();
+        public Dictionary<String, Models.Routing.Path> Paths = new Dictionary<String, Models.Routing.Path>();
+
         /*
          
          */
@@ -250,31 +253,23 @@ namespace AirCoon.Game.Handler
                 }
 
                 Airport a = new Airport(line[0], line[1], line[4], r, Ishub, g, line[9], line[3], RunwayLength, RunwayCount, slots, passengers);
-
+                foreach (KeyValuePair<String, Airport> b in this.Airports)
+                {
+                    if (a.Continent.Code == b.Value.Continent.Code)
+                    {
+                        Connection c = new Connection(a, b.Value);
+                        if (c.Distance < 200 && a.Iata != b.Key)
+                        {
+                            c = c.Register();
+                            Models.Routing.Path p = new GroundPath(c);
+                        }
+                    }
+                } // end Floreach
 
                 line = csv.GetNextLine();
             } // End Load Airports
 
-            // Creating Connections
-            foreach(KeyValuePair<String,Airport> a in this.Airports)
-            {
-                if (a.Value.Iata == "FRA")
-                {
-                    foreach (KeyValuePair<String, Airport> b in this.Airports)
-                    {
-                        if (b.Value.TotalPassengers > 50000)
-                        {
 
-                            Connection C = new Connection(a.Value, b.Value, ConnectionType.Ground);
-                            double d = C.Distance;
-                            double m = d / 1.6;
-                            String n1 = C.Airport1.Name;
-                            String n2 = C.Airport2.Name;
-                            C = null;
-                        }
-                    }
-                }
-            }
             
             // Loading Manufacturers
             Debug.Write("Loading Manufacturers",3);

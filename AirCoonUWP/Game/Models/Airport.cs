@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using AirCoon.Game.Handler;
 using AirCoon.Game.Models.Geo;
+using AirCoon.Game.Models.Routing;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
 
@@ -36,6 +37,7 @@ namespace AirCoon.Game.Models
         private int _TotalPassengers;
         public int TotalPassengers { get { return _TotalPassengers; } }
 
+        public Dictionary<Airport, Connection> Connections = new Dictionary<Airport, Connection>();
 
         public Airport(String iata, String icao, string name,
                     Region region, bool hub, GeoCoordinate coordinate, String size, String municipality,

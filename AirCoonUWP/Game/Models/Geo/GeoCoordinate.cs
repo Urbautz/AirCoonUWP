@@ -52,7 +52,7 @@ namespace AirCoon.Game.Models.Geo
             return x * PI180;
         }
 
-        public double calculate_distance(GeoCoordinate other)
+        public double CalculateDistance(GeoCoordinate other)
         {
             double lon1 = (double) this.Longitude;
             double lat1 = (double) this.Latitude;
