@@ -1,43 +1,52 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace AirCoon.Game.Models
 {
+    [Serializable]
     public class Money
+        : ISerializable
     {
 
-        private decimal value;
-
+        private decimal _Value;
         public decimal Value
         {
-            set { this.value = value; }
-            get { return Decimal.Round(value, 2); }
+            set { this._Value = value; }
+            get { return Decimal.Round(_Value, 2); }
         }
 
   public decimal PrecisionValue
         {
-            get { return this.value; }
+            get { return this._Value; }
         }
 
         // Constructor with value
         public Money(Decimal value)
         {
-            this.value = value;
+            this._Value = value;
         } // End Constructor
 
         // Constructor with value
         public Money(int value)
         {
-            this.value = (Decimal)value;
-        } // End Constructor
-        public Money(Int64 value)
-        {
-            this.value = (Decimal)value;
+            this._Value = (Decimal)value;
         } // End Constructor
 
+
+        public Money(Int64 value)
+        {
+            this._Value = (Decimal)value;
+        } // End Constructor
+
+
+        public Money(SerializationInfo info, StreamingContext ctxt)
+        {
+            this._Value = info.GetDecimal("Value");
+        }
 
         public static Money operator +(Money m1, Money m2)
         {
@@ -83,6 +92,11 @@ namespace AirCoon.Game.Models
         public override int GetHashCode()
         {
             return 1363966828 + PrecisionValue.GetHashCode();
+        }
+
+        public void GetObjectData(SerializationInfo info, StreamingContext context)
+        {
+            info.AddValue("Value", PrecisionValue);
         }
     }
 }
