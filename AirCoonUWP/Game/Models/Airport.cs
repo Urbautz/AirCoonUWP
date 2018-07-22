@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using AirCoon.Game.Handler;
 using AirCoon.Game.Models.Geo;
+using AirCoon.Game.Models.Routing;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
 
@@ -14,28 +15,29 @@ namespace AirCoon.Game.Models
     public class Airport
         : ISerializable, IAmTickable
     {
-        readonly String Iata;
-        readonly String Icao;
-        readonly String Name;
+        public readonly String Iata;
+        public readonly String Icao;
+        public readonly String Name;
 
-        readonly Region Region;
+        public readonly Region Region;
         public Country Country
         { get { return Region.Country; } }
         public Continent Continent
         { get { return this.Country.Continent; } }
-        readonly String Municipality;
+        public readonly String Municipality;
 
-        readonly bool Hub;
-        readonly GeoCoordinate Coordinate;
+        public readonly bool Hub;
+        public readonly GeoCoordinate Coordinate;
         public Char Size;
 
-        readonly Int16 RunwayLength;
-        readonly Int16 RunwayCount;
-        readonly Int16 Slots;
+        public readonly Int16 RunwayLength;
+        public readonly Int16 RunwayCount;
+        public readonly Int16 Slots;
 
         private int _TotalPassengers;
-        public int TotalPassengers { get { return TotalPassengers; } }
+        public int TotalPassengers { get { return _TotalPassengers; } }
 
+        public Dictionary<Airport, Connection> Connections = new Dictionary<Airport, Connection>();
 
         public Airport(String iata, String icao, string name,
                     Region region, bool hub, GeoCoordinate coordinate, String size, String municipality,

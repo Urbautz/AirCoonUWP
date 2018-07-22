@@ -8,7 +8,7 @@ using AirCoon.Game.Handler;
 using AirCoon.Game.Models;
 using AirCoon.Game.Models.Aircraft;
 
-namespace AirCoonUWP.Game.Models.Airline
+namespace AirCoon.Game.Models.Airline
 {
     [Serializable]
     public class Fleet
