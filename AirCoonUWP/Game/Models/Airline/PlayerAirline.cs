@@ -5,18 +5,27 @@ using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 using AirCoon.Game.Handler;
+using AirCoon.Game.Models;
 
-namespace AirCoonUWP.Game.Models.Airline
+namespace AirCoon.Game.Models.Airline
 {
     public class PlayerAirline
         : Airline
     {
-        public override void DailyTick(Tick CurrentTick)
+
+        public PlayerAirline(String code, String name, Airport hub)
+        {
+            this._Code = code;
+            this._Name = Name;
+            this._Hub = hub;
+        }
+
+        public override void GetObjectData(SerializationInfo info, StreamingContext context)
         {
             throw new NotImplementedException();
         }
 
-        public override void GetObjectData(SerializationInfo info, StreamingContext context)
+        public override void DailyTick(Tick CurrentTick)
         {
             throw new NotImplementedException();
         }

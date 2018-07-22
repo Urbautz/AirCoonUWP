@@ -140,6 +140,8 @@
     <Compile Include="Game\Models\Aircraft\Plane.cs" />
     <Compile Include="Game\Models\Aircraft\ProductionLine.cs" />
     <Compile Include="Game\Models\Airline\Airline.cs" />
+    <Compile Include="Game\Models\Airline\Base.cs" />
+    <Compile Include="Game\Models\Airline\Hub.cs" />
     <Compile Include="Game\Models\Airline\EnemyAirline.cs" />
     <Compile Include="Game\Models\Airline\Fleet.cs" />
     <Compile Include="Game\Models\Airline\PlayerAirline.cs" />
