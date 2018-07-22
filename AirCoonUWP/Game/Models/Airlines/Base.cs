@@ -8,10 +8,10 @@ using System.Threading.Tasks;
 using AirCoon.Game.Models.Airline;
 using AirCoon.Game.Models;
 
-namespace AirCoon.Game.Models.Airline
+namespace AirCoon.Game.Models.Airlines
 {
     [Serializable]
-    class Base
+    public class Base
       : ISerializable, IAmTickable
 
     {
@@ -24,6 +24,18 @@ namespace AirCoon.Game.Models.Airline
         public Base(Airport airport)
         {
             this._Airport = airport;
+        }
+
+        private bool _IsHub = false;
+        public bool IsHub { get { return _IsHub;} }
+
+        public Base() {
+            _IsHub = true;
+        }
+
+        public Base(Airport Aiport, bool ishub = true)
+        {
+
         }
 
         void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context)

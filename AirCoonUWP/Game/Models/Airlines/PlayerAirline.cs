@@ -4,13 +4,20 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
+using Aircoon.Game.Models.Airline;
 using AirCoon.Game.Handler;
+using AirCoon.Game.Models;
 
-namespace AirCoonUWP.Game.Models.Airline
+namespace AirCoon.Game.Models.Airlines
 {
-    public class EnemyAirline
+    public class PlayerAirline
         : Airline
     {
+
+        public PlayerAirline(String code, String name, Airport hub)
+        {
+            base.Construct(code, name, hub);
+        }
 
         public override void GetObjectData(SerializationInfo info, StreamingContext context)
         {
@@ -21,8 +28,6 @@ namespace AirCoonUWP.Game.Models.Airline
         {
             throw new NotImplementedException();
         }
-
-
 
         public override void MiniTick(Tick CurrentTick, int MiniTick)
         {

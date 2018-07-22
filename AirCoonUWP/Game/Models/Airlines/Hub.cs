@@ -8,16 +8,16 @@ using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Aircoon.Game.Models.Airline
+namespace Aircoon.Game.Models.Airlines
 {
     [Serializable]
-    class Hub
+    public class Hub
       : Base, ISerializable, IAmTickable
     {
 
         public Hub(Airport airport)
         {
-            _Airport = airport;
+            base._Airport = airport;
         }
 
         public void GetObjectData(SerializationInfo info, StreamingContext context)
