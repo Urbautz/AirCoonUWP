@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using AirCoon.Game.Handler;
 using AirCoon.Game.Models.Aircraft;
-using AirCoonUWP.Game.Models.Airline;
+using AirCoon.Game.Models.Airlines;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
 

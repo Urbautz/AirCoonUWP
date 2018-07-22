@@ -139,12 +139,12 @@
     <Compile Include="Game\Models\Aircraft\Manufacturer.cs" />
     <Compile Include="Game\Models\Aircraft\Plane.cs" />
     <Compile Include="Game\Models\Aircraft\ProductionLine.cs" />
-    <Compile Include="Game\Models\Airline\Airline.cs" />
-    <Compile Include="Game\Models\Airline\Base.cs" />
-    <Compile Include="Game\Models\Airline\Hub.cs" />
-    <Compile Include="Game\Models\Airline\EnemyAirline.cs" />
-    <Compile Include="Game\Models\Airline\Fleet.cs" />
-    <Compile Include="Game\Models\Airline\PlayerAirline.cs" />
+    <Compile Include="Game\Models\Airlines\Airline.cs" />
+    <Compile Include="Game\Models\Airlines\Assets\Base.cs" />
+    <Compile Include="Game\Models\Airlines\Assets\Hub.cs" />
+    <Compile Include="Game\Models\Airlines\EnemyAirline.cs" />
+    <Compile Include="Game\Models\Airlines\Assets\Fleet.cs" />
+    <Compile Include="Game\Models\Airlines\PlayerAirline.cs" />
     <Compile Include="Game\Models\Airport.cs" />
     <Compile Include="Game\Models\Routing\Connection.cs" />
     <Compile Include="Game\Models\Geo\Continent.cs" />
@@ -257,7 +257,11 @@
       <Version>6.1.5</Version>
     </PackageReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Game\Models\Airlines\Finance\" />
+    <Folder Include="Game\Models\Airlines\Ops\" />
+    <Folder Include="Game\Models\Airlines\Staff\" />
+  </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>

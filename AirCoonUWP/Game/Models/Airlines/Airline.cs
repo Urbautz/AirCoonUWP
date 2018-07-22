@@ -1,5 +1,7 @@
-﻿using Aircoon.Game.Models.Airline;
+﻿using Aircoon.Game.Models.Airlines;
+using Aircoon.Game.Models.Airlines.Assets;
 using AirCoon.Game.Handler;
+using AirCoon.Game.Models.Airlines.Assets;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,11 +34,13 @@ namespace AirCoon.Game.Models.Airlines
         protected List<Base> _Base = new List<Base>();
         public List<Base> Base { get { return _Base; } }
 
-        public void Construct(String code, String name, Airport hub)
+        public void Construct(String code, String name, Airport hub_airport)
         {
             this._Code = code;
             this._Name = Name;
-            this._Hub.Add(new Hub(hub));
+            Hub hub = new Hub(hub_airport);
+            this._Hub.Add(hub);
+            this._Base.Add(hub); 
         }
 
 

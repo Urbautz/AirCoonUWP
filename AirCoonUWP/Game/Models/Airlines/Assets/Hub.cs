@@ -1,6 +1,7 @@
 ﻿using AirCoon.Game.Handler;
 using AirCoon.Game.Models;
-using AirCoon.Game.Models.Airline;
+using AirCoon.Game.Models.Airlines;
+using AirCoon.Game.Models.Airlines.Assets;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +9,7 @@ using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Aircoon.Game.Models.Airlines
+namespace Aircoon.Game.Models.Airlines.Assets
 {
     [Serializable]
     public class Hub

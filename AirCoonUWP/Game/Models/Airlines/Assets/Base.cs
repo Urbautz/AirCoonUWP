@@ -5,10 +5,10 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
-using AirCoon.Game.Models.Airline;
+using AirCoon.Game.Models.Airlines;
 using AirCoon.Game.Models;
 
-namespace AirCoon.Game.Models.Airlines
+namespace AirCoon.Game.Models.Airlines.Assets
 {
     [Serializable]
     public class Base
