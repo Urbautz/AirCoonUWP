@@ -15,9 +15,9 @@ namespace AirCoon.Game.Models.Airline
 
         public PlayerAirline(String code, String name, Airport hub)
         {
-            this._Code = code;
-            this._Name = Name;
-            this._Hub = hub;
+            base._Code = code;
+            base._Name = Name;
+            //base._Hub = hub;
         }
 
         public override void GetObjectData(SerializationInfo info, StreamingContext context)
