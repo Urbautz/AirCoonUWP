@@ -9,6 +9,7 @@ using AirCoon.Game.Models.Routing;
 
 namespace AirCoon.Game.Models.Routing
 {
+    [Serializable]
     public class GroundPath : Path
     {
 
