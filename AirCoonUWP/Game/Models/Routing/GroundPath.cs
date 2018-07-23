@@ -21,7 +21,7 @@ namespace AirCoon.Game.Models.Routing
             if (!SaveGamePublic.SaveGame.Paths.ContainsKey(this.Code))
             {
                 SaveGamePublic.SaveGame.Paths.Add(this.Code, this);
-                Connection.Paths.Add(this);
+                Connection.Paths.Add(this.Code, this);
             }
         }
 
