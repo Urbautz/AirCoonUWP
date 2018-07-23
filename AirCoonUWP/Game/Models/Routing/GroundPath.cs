@@ -24,6 +24,18 @@ namespace AirCoon.Game.Models.Routing
                 Connection.Paths.Add(this.Code, this);
             }
         }
+        
+        public GroundPath(SerializationInfo info, StreamingContext ctxt);
+        {
+              base.Connection = SaveGamePublic.Savegame.Connections[info.GetString("Connection")];
+              base._StandardCost = (Money) info.GetValue("StandardCost", typeof(Money))
+        }
+        
+        public void GetObjectData(SerializationInfo info, StreamingContext context)
+        {
+            info.AddValue(base.Connection.Code);
+            info.AddValue(base._StandardCost);
+        };
 
 
         public override void CalculateStandardCost()
