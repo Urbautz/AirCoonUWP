@@ -12,6 +12,9 @@ namespace AirCoon.Game.Models.Geo
     public class GeoCoordinate
         : ISerializable
     {
+        const double PI180 = Math.PI / 180;
+        const double Radius = 6371.1;
+
         readonly Decimal Latitude;
 
         readonly Decimal Longitude;
@@ -44,12 +47,31 @@ namespace AirCoon.Game.Models.Geo
         }
 
 
+        public static double Radians(double x)
+        {
+            return x * PI180;
+        }
 
+        public double CalculateDistance(GeoCoordinate other)
+        {
+            double lon1 = (double) this.Longitude;
+            double lat1 = (double) this.Latitude;
 
+            double lon2 = (double) other.Longitude;
+            double lat2 = (double) other.Latitude;
 
+            double dlon = Radians(lon2 - lon1);
+            double dlat = Radians(lat2 - lat1);
+
+            double a = (Math.Sin(dlat / 2) * Math.Sin(dlat / 2)) + Math.Cos(Radians(lat1)) * Math.Cos(Radians(lat2)) * (Math.Sin(dlon / 2) * Math.Sin(dlon / 2));
+            double angle = 2 * Math.Atan2(Math.Sqrt(a), Math.Sqrt(1 - a));
+            return angle * Radius;
+        }
+
+        /*
             public double calculate_distance(GeoCoordinate other)
         {
-            double circumference = 40000.0; // Earth's circumference at the equator in km
+            double circumference = 40075.16; // Earth's circumference at the equator in km
             double distance = 0.0;
             double latitude1Rad = DegreesToRadians(this.Latitude);
             double latititude2Rad = DegreesToRadians(other.Latitude);
@@ -77,6 +99,7 @@ namespace AirCoon.Game.Models.Geo
 
         private static Double DegreesToRadians(Decimal angle) => 
             (Double)(Math.PI * (Double)angle / 180.0);
+            */
 
     } // end class
 } // end Namespace

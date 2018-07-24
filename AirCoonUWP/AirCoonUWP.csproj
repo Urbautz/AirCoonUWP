@@ -144,11 +144,14 @@
     <Compile Include="Game\Models\Airline\Fleet.cs" />
     <Compile Include="Game\Models\Airline\PlayerAirline.cs" />
     <Compile Include="Game\Models\Airport.cs" />
+    <Compile Include="Game\Models\Routing\Connection.cs" />
     <Compile Include="Game\Models\Geo\Continent.cs" />
     <Compile Include="Game\Models\Geo\Country.cs" />
     <Compile Include="Game\Models\Geo\GeoCoordinate.cs" />
     <Compile Include="Game\Models\Geo\Region.cs" />
     <Compile Include="Game\Models\Money.cs" />
+    <Compile Include="Game\Models\Routing\GroundPath.cs" />
+    <Compile Include="Game\Models\Routing\Path.cs" />
     <Compile Include="Game\Models\Weather.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
