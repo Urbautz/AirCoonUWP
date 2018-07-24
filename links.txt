@@ -1,25 +1,6 @@
 https://docs.microsoft.com/en-us/uwp/api/windows.ui.xaml.controls.contentdialog
 
-Icons for Navigation
-Overview           Globe
-Airline Details    Home
-Alliance           Link
+http://www.wpf-tutorial.com/list-controls/itemscontrol/
 
-Finance
-Marketing         LikeDislike
-Personel          People
-
-Base              Map
-Flightplan        Clock
-Planes            EB4C, EC40
-
-Data              List, F0E4
-
-
-Appbar
-Pause
-Play
-Next
-
-Save    Save
-Money   Up/Down
+Abstrakte Klassen Types:
+http://www.net-informations.com/q/faq/type.html

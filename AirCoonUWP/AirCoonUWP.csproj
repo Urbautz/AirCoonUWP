@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>AirCoonUWP</RootNamespace>
     <AssemblyName>AirCoonUWP</AssemblyName>
-    <DefaultLanguage>de-DE</DefaultLanguage>
+    <DefaultLanguage>EN-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
     <TargetPlatformVersion Condition=" '$(TargetPlatformVersion)' == '' ">10.0.17134.0</TargetPlatformVersion>
     <TargetPlatformMinVersion>10.0.17134.0</TargetPlatformMinVersion>
@@ -135,6 +135,14 @@
     <Compile Include="Game\Handler\Debug.cs" />
     <Compile Include="Game\Handler\SaveGame.cs" />
     <Compile Include="Game\Handler\Tick.cs" />
+    <Compile Include="Game\Models\Aircraft\Aircraft.cs" />
+    <Compile Include="Game\Models\Aircraft\Manufacturer.cs" />
+    <Compile Include="Game\Models\Aircraft\Plane.cs" />
+    <Compile Include="Game\Models\Aircraft\ProductionLine.cs" />
+    <Compile Include="Game\Models\Airline\Airline.cs" />
+    <Compile Include="Game\Models\Airline\EnemyAirline.cs" />
+    <Compile Include="Game\Models\Airline\Fleet.cs" />
+    <Compile Include="Game\Models\Airline\PlayerAirline.cs" />
     <Compile Include="Game\Models\Airport.cs" />
     <Compile Include="Game\Models\Geo\Continent.cs" />
     <Compile Include="Game\Models\Geo\Country.cs" />
@@ -163,6 +171,12 @@
     </Content>
     <Content Include="Data\regions.dat">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\manufacturers.dat">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\aircraft.dat">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
   <ItemGroup>
@@ -238,9 +252,7 @@
       <Version>6.1.5</Version>
     </PackageReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Game\Models\Airline\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>

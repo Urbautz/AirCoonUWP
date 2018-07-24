@@ -2,16 +2,24 @@
     x:Class="AirCoonUWP.MainPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:AirCoonUWP"
+    xmlns:local="using:AirCoonUWP.Handler"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+    >
     <Page.Resources>
         <AcrylicBrush x:Key="Brush60" TintColor="#997ac5ea" BackgroundSource="HostBackdrop" TintOpacity="0.6"/>
-        <AcrylicBrush x:Key="Brush90" TintColor="#007ac5ea" BackgroundSource="HostBackdrop" TintOpacity="0.9"/>
+        <AcrylicBrush x:Key="Brush90" TintColor="#997ac5ea" BackgroundSource="HostBackdrop" TintOpacity="0.9"/>
         <AcrylicBrush x:Key="Brush20" TintColor="#FF7ac5ea" BackgroundSource="HostBackdrop" TintOpacity="0.2"/>
-        <AcrylicBrush x:Key="Transparent" TintColor="#997ac5ea" BackgroundSource="Backdrop" TintOpacity="0.0"/>
+        <AcrylicBrush x:Key="Transparent" TintColor="#FF7ac5ea" BackgroundSource="HostBackdrop" TintOpacity="0.0"/>
+        <AcrylicBrush x:Key="Massive" TintColor="#FF7ac5ea" BackgroundSource="HostBackdrop" TintOpacity="1.0"/>
+
+        <AcrylicBrush x:Key="BrushX60" TintColor="#997ac5ea" BackgroundSource="Backdrop" TintOpacity="0.6"/>
+        <AcrylicBrush x:Key="BrushX90" TintColor="#997ac5ea" BackgroundSource="Backdrop" TintOpacity="0.9"/>
+        <AcrylicBrush x:Key="BrushX20" TintColor="#997ac5ea" BackgroundSource="Backdrop" TintOpacity="0.2"/>
+        <AcrylicBrush x:Key="TransparentX" TintColor="#FF7ac5ea" BackgroundSource="Backdrop" TintOpacity="0.0"/>
+
         <Style TargetType="Frame">
             <Setter Property="Background" Value="{StaticResource Brush60}" />
         </Style>
@@ -21,16 +29,41 @@
         <Style TargetType="NavigationView" x:Key="NavView">
             <Setter Property="Background" Value="{StaticResource Brush60}" />
         </Style>
+        <Style TargetType="RelativePanel" x:Key="CommandBar">
+            <Setter Property="Background" Value="{StaticResource Brush90}" />
+        </Style>
+        <Style TargetType="StackPanel" x:Key="CommandBarStackPanel">
+            <Setter Property="Background" Value="{StaticResource Brush90}" />
+        </Style>
+        <Style TargetType="Button" x:Key="CommandBarButton">
+            <Setter Property="Background" Value="{StaticResource BrushX20}" />
+        </Style>
+        <Style TargetType="AppBarToggleButton" x:Key="AppToogle">
+            <Setter Property="Background" Value="{StaticResource BrushX20}" />
+        </Style>
+        <Style TargetType="TextBlock" x:Key="AppbarHeaderText">
+            <Setter Property="Margin" Value="0,0,0,0" />
+            <Setter Property="FontSize" Value="12" />
+            <Setter Property="HorizontalTextAlignment" Value="Center" />
+        </Style>
+        <Style TargetType="TextBlock" x:Key="AppbarContentText">
+            <Setter Property="Margin" Value="10,0,10,0" />
+            <Setter Property="FontSize" Value="15" />
+            <Setter Property="HorizontalTextAlignment" Value="Center"></Setter>
+        </Style>
+
+
     </Page.Resources>
 
 
 
-        
+
     <NavigationView x:Name="NavView"
                     ItemInvoked="Navigate"
                     Loaded="NavViewLoaded"
                     BackRequested="NavViewBackRequested"
                     Style="{StaticResource NavView}"
+                    
                     >
 
         <NavigationView.Header>
@@ -47,15 +80,46 @@
             </Grid>
         </NavigationView.Header>
 
+
+        <NavigationView.MenuItems>
+            <NavigationViewItemHeader Content="Overview"/>
+            <NavigationViewItem x:Uid="WorldNavItem" Icon="Globe" Content="World" Tag="World"/>
+            <NavigationViewItem x:Uid="AirlineDetailsItem" Icon="Home" Content="My Airline" Tag="AirlineDetails"/>
+            <NavigationViewItem x:Uid="AllianceItem" Icon="Link" Content="Alliance" Tag="Alliance"/>
+
+            <NavigationViewItemSeparator/>
+            <NavigationViewItemHeader Content="Operations" />
+            <NavigationViewItem x:Uid="BaseItem" Icon="Map" Content="Bases" Tag="Bases"/>
+            <NavigationViewItem x:Uid="FlightPlanItem" Icon="Calendar"  Content="Flightplan" Tag="FlightPlan"/>
+            <NavigationViewItem x:Uid="FleetItem" Content="Fleet" Tag="Fleet">
+                <NavigationViewItem.Icon>
+                    <FontIcon Glyph="&#xEC40;"/>
+                    <!-- or EC40 -->
+                </NavigationViewItem.Icon>
+            </NavigationViewItem>
+
+            <NavigationViewItemSeparator/>
+            <NavigationViewItemHeader Content="Management" />
+            <NavigationViewItem x:Uid="FinanceItem" Content="Finance" Tag="Finance">
+                <NavigationViewItem.Icon>
+                    <FontIcon Glyph="&#xE1D0;"/>
+                </NavigationViewItem.Icon>
+            </NavigationViewItem>
+            <NavigationViewItem x:Uid="StaffsItem" Icon="People" Content="Staff" Tag="Staff" />
+            <NavigationViewItem x:Uid="MarketingItem" Icon="LikeDislike" Content="Marketing" Tag="Marketing" />
+        </NavigationView.MenuItems >
+
+
+        <!-- Commandbar & ContentFrame-->
         <Grid Style="{StaticResource OuterGrid}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"></RowDefinition>
-                <RowDefinition Height="50"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
             </Grid.RowDefinitions>
-
+            <!-- Contentframe-->
             <Frame x:Name="ContentFrame" Margin="0" Grid.Row="0">
                 <Frame.ContentTransitions>
                     <TransitionCollection>
@@ -63,49 +127,149 @@
                     </TransitionCollection>
                 </Frame.ContentTransitions>
             </Frame>
-            <RelativePanel Grid.Row="1" Background="Red">
-                <TextBlock Text="Commandbar" Height="200"></TextBlock>
+
+            <!-- Commandbar -->
+            <RelativePanel Grid.Row="1" Style="{StaticResource CommandBar}"
+                           MinWidth="600" MaxHeight="200">
+
+                <!-- Left Commandbar-->
+                <StackPanel RelativePanel.AlignLeftWithPanel="True"
+                            RelativePanel.AlignTopWithPanel="True"
+                            Margin="10,10,10,10" MaxWidth="110"
+                            Name="CommandBarLeft" Orientation="Horizontal">
+                    <AppBarToggleButton Icon="Play" 
+                                        Label="{x:Bind Path=TickHandler.TickSpeedString,Mode=OneWay}"
+                                        Margin="0,0,5,0"
+                                         Style="{StaticResource AppToogle}"
+                                        >
+                    </AppBarToggleButton>
+                    <RelativePanel>
+                        <!-- Plus / Minus Buttons-->
+                        <Button Content="+" 
+                                Click="ClickIncreaseSpeed"
+                                Height="26"  Width="26"
+                                HorizontalAlignment="Center" RelativePanel.AlignTopWithPanel="True"
+                                Margin="1,0,1,0" Padding="0,0,0,0"
+                                FontSize="14" 
+                                VerticalContentAlignment="Top" HorizontalContentAlignment="Center"
+                                 Style="{StaticResource CommandBarButton}"/>
+                        <Button Content="-" 
+                                 Click="ClickDecreaseSpeed"
+                                Height="26"  Width="26"
+                                HorizontalAlignment="Center"  RelativePanel.AlignBottomWithPanel="True"
+                                Margin="1,0,1,0" Padding="0,0,0,0"
+                                FontSize="14" 
+                                VerticalContentAlignment="Top"  HorizontalContentAlignment="Center"
+                                Style="{StaticResource CommandBarButton}"/>
+                    </RelativePanel>
+                </StackPanel>
+                <AppBarSeparator RelativePanel.RightOf="CommandBarLeft" Margin="10,0,10,0"
+                                 RelativePanel.LeftOf="CommandBarMiddle"/>
+                    
+                <!-- Middle Appbar-->   
+                <Grid RelativePanel.AlignHorizontalCenterWithPanel="True" 
+                        Name="CommandBarMiddle"
+                        Margin="10,10,10,10" MaxWidth="290">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Grid.Column="0" Grid.Row="0"
+                                Text="Cash: " 
+                                Style="{StaticResource AppbarHeaderText}"
+                                VerticalAlignment="Center"
+                                />
+                    <TextBlock Grid.Column="0" Grid.Row="1" 
+                                Text="Total Value: " 
+                                Style="{StaticResource AppbarHeaderText}"
+                                VerticalAlignment="Center"
+                                />
+                    <TextBlock Grid.Column="1" Grid.Row="0"
+                                Text="$ 1.000.000.000" 
+                                Style="{StaticResource AppbarContentText}"
+                                />
+                    <TextBlock Grid.Column="1" Grid.Row="1"
+                                Text="$ 1.000.000.000" 
+                                Style="{StaticResource AppbarContentText}"
+                                />
+                </Grid>
+
+            
+                <AppBarSeparator RelativePanel.RightOf="CommandBarMiddle" Margin="10,0,10,0"
+                                 RelativePanel.LeftOf="CommandBarRight"/>
+
+                <!-- Right Appbar-->
+                <StackPanel RelativePanel.AlignRightWithPanel="true"
+                            Margin="10,10,10,10" MaxWidth="290"
+                            Name="CommandBarRight">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Grid.Row="0" Grid.Column="0"
+                                   Style="{StaticResource AppbarHeaderText}">
+                            Year
+                        </TextBlock>
+                        <TextBlock Grid.Row="0" Grid.Column="1"
+                                   Style="{StaticResource AppbarHeaderText}">
+                            Q</TextBlock>
+                        <TextBlock Grid.Row="0" Grid.Column="2"
+                                   Style="{StaticResource AppbarHeaderText}">
+                            Week</TextBlock>
+                        <TextBlock Grid.Row="0" Grid.Column="3"
+                                   Style="{StaticResource AppbarHeaderText}">
+                            Day</TextBlock>
+                        <TextBlock Grid.Row="0" Grid.Column="4"
+                                   Style="{StaticResource AppbarHeaderText}">
+                            Time</TextBlock>
+
+                        <TextBlock Grid.Row="1" Grid.Column="0" 
+                                   Style="{StaticResource AppbarContentText}">
+                            1</TextBlock>
+                        <TextBlock Grid.Row="1" Grid.Column="1" 
+                                   Style="{StaticResource AppbarContentText}">
+                            2</TextBlock>
+                        <TextBlock Grid.Row="1" Grid.Column="2" 
+                                   Style="{StaticResource AppbarContentText}">
+                            5</TextBlock>
+                        <TextBlock Grid.Row="1" Grid.Column="3" 
+                                   Style="{StaticResource AppbarContentText}">
+                            31</TextBlock>
+                        <TextBlock Grid.Row="1" Grid.Column="4" 
+                                   Style="{StaticResource AppbarContentText}">
+                            17:30</TextBlock>
+                    </Grid>
+                    
+                </StackPanel>
             </RelativePanel>
         </Grid>
 
-        <NavigationView.MenuItems>
-                <NavigationViewItemHeader Content="Overview"/>
-                <NavigationViewItem x:Uid="WorldNavItem" Icon="Globe" Content="World" Tag="World"/>
-                <NavigationViewItem x:Uid="AirlineDetailsItem" Icon="Home" Content="My Airline" Tag="AirlineDetails"/>
-                <NavigationViewItem x:Uid="AllianceItem" Icon="Link" Content="Alliance" Tag="Alliance"/>
-
-                <NavigationViewItemSeparator/>
-                <NavigationViewItemHeader Content="Operations" />
-                <NavigationViewItem x:Uid="BaseItem" Icon="Map" Content="Bases" Tag="Bases"/>
-                <NavigationViewItem x:Uid="FlightPlanItem" Icon="Calendar"  Content="Flightplan" Tag="FlightPlan"/>
-                <NavigationViewItem x:Uid="FleetItem" Content="Fleet" Tag="Fleet">
-                    <NavigationViewItem.Icon>
-                        <FontIcon Glyph="&#xEC40;"/>
-                        <!-- or EC40 -->
-                    </NavigationViewItem.Icon>
-                </NavigationViewItem>
-
-                <NavigationViewItemSeparator/>
-                <NavigationViewItemHeader Content="Management" />
-                <NavigationViewItem x:Uid="FinanceItem" Content="Finance" Tag="Finance">
-                    <NavigationViewItem.Icon>
-                        <FontIcon Glyph="&#xE1D0;"/>
-                    </NavigationViewItem.Icon>
-                </NavigationViewItem>
-                <NavigationViewItem x:Uid="StaffsItem" Icon="People" Content="Staff" Tag="Staff" />
-                <NavigationViewItem x:Uid="MarketingItem" Icon="LikeDislike" Content="Marketing" Tag="Marketing" />
-            </NavigationView.MenuItems>
 
 
 
 
 
 
-            
-            
 
-        </NavigationView>
-<!--
+
+
+
+    </NavigationView>
+    <!--
         <AppBar Grid.Row="1" IsSticky="True">
             <AppBarToggleButton Icon="Like" Label="SymbolIcon"/>
             <AppBarButton Icon="Like" Label="SymbolIcon"/>

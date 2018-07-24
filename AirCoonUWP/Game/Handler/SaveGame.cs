@@ -8,6 +8,7 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using AirCoon.Game.Models;
 using AirCoon.Game.Models.Geo;
+using AirCoon.Game.Models.Aircraft;
 using Windows.Storage;
 
 namespace AirCoon.Game.Handler
@@ -26,8 +27,9 @@ namespace AirCoon.Game.Handler
         public Dictionary<String, Country> Countries = new Dictionary<String, Country>();
         public Dictionary<String, Region> Regions = new Dictionary<String, Region>();
         public Dictionary<String, Airport> Airports = new Dictionary<string, Airport>();
-        
-        
+        public Dictionary<String, Manufacturer> Manufacturers = new Dictionary<string, Manufacturer>();
+        public Dictionary<String, Aircraft> Aircrafts = new Dictionary<string, Aircraft>();
+
         public Dictionary<Int64, Tick> Ticks = new Dictionary<Int64, Tick>();
         /*
          
@@ -136,7 +138,7 @@ namespace AirCoon.Game.Handler
             // Check letters
             string pattern = @"^[a-zA-Z]+$";
             Regex regex = new Regex(pattern);
-            if (!regex.IsMatch(name))
+            if (!regex.IsMatch(code))
             {
                 throw new SaveGameException("Code " + code + " is not valid.");
             }
@@ -149,18 +151,12 @@ namespace AirCoon.Game.Handler
                 throw new SaveGameException("Savegame" + code + " already exists.");
             }
 
-
-            // Check if valid hub
-
             // Create directory
             //Debug.Write("Creating Directory: " + SaveGameFolder + "\\" + code, 2);
             ConcreteSaveGameFolder = SaveGameFolder + "\\" + code;
             Directory.CreateDirectory(ConcreteSaveGameFolder);
 
-
-
             // Load Continents
-
             Debug.Write("Loading Continents", 3);
             StreamReader stream = new StreamReader(ConfigPath + "\\Continents.dat");
             DataCsvLoader csv = new DataCsvLoader(stream, true);
@@ -173,7 +169,7 @@ namespace AirCoon.Game.Handler
                 int[] weather = new int[12];
                 for (int i = 2; i < 14; i++)
                 {
-                    weather[i - 2] = int.Parse(line[i]);
+                    weather[i - 2] = Int32.Parse(line[i]);
                 }
                 Continent c = new Continent(contcode, contname, weather);
                 line = csv.GetNextLine();
@@ -256,8 +252,32 @@ namespace AirCoon.Game.Handler
 
 
                 line = csv.GetNextLine();
+            } // End Load Airports
+            
+            // Loading Manufacturers
+            Debug.Write("Loading Manufacturers",3);
+            stream = new StreamReader(ConfigPath + "\\manufacturers.dat");
+            csv = new DataCsvLoader(stream, false,true);
+            Dictionary<string,string> dic = csv.GetNextLineHeaders();
+            while (dic != null)
+            {
+                Manufacturer M = new Manufacturer(dic["Manufacturer"], 
+                                                  Int32.Parse(dic["Parallel"]),
+                                                  Int32.Parse(dic["PointsPerDay"])
+                                                 );
+                dic = csv.GetNextLineHeaders();
             }
 
+            // Loading Manufacturers
+            Debug.Write("Loading Aircrafts", 3);
+            stream = new StreamReader(ConfigPath + "\\aircraft.dat");
+            csv = new DataCsvLoader(stream, false, true);
+            dic = csv.GetNextLineHeaders();
+            while (dic != null)
+            {
+                Aircraft A = new Aircraft(dic);
+                dic = csv.GetNextLineHeaders();
+            }
 
 
             Debug.Write("Load complete", 1);
@@ -319,13 +339,40 @@ namespace AirCoon.Game.Handler
                 bformatter.Serialize(stream, this.Airports);
                 stream.Close();
             }
-
-            // Loadtest Region
-            this.Airports = null;
+            // Loadtest Airport
+            /*this.Airports = null;
             Stream stream2 = File.Open(this.ConcreteSaveGameFolder + "\\airports.dat", FileMode.Open);
             this.Airports = (Dictionary<string, Airport>)bformatter.Deserialize(stream2);
             Debug.Write("Regionloader test: " + this.Airports["FRA"].Size);
+            Console.ReadLine();*/
+            
+            Debug.Write("Saving Manufacturers", 2);
+                        using (Stream stream = File.Open(this.ConcreteSaveGameFolder + "\\manufacturers.dat", FileMode.Create))
+            {
+                bformatter.Serialize(stream, this.Manufacturers);
+                stream.Close();
+            }
+            /*//Loadtest Manufacturers
+            this.Manufacturers = null;
+            Stream stream2 = File.Open(this.ConcreteSaveGameFolder + "\\manufacturers.dat", FileMode.Open);
+            this.Manufacturers = (Dictionary<string, Manufacturer>)bformatter.Deserialize(stream2);
+            Debug.Write("Manufacturerloader test: " + this.Manufacturers.Count);
+            Console.ReadLine();*/
+
+
+            Debug.Write("Saving Aircraft", 2);
+            using (Stream stream = File.Open(this.ConcreteSaveGameFolder + "\\aircraft.dat", FileMode.Create))
+            {
+                bformatter.Serialize(stream, this.Aircrafts);
+                stream.Close();
+            }
+            //Loadtest Manufacturers
+            this.Aircrafts = null;
+            Stream stream2 = File.Open(this.ConcreteSaveGameFolder + "\\aircraft.dat", FileMode.Open);
+            this.Aircrafts = (Dictionary<string, Aircraft>)bformatter.Deserialize(stream2);
+            Debug.Write("Manufacturerloader test: " + this.Aircrafts.Count);
             Console.ReadLine();
+
 
             Debug.Write("Saved!", 1);
         }
@@ -336,6 +383,7 @@ namespace AirCoon.Game.Handler
     {
         public static SaveGame SaveGame;
         public static Page OuterFrame;
+        public static TickHandler TickHandler;
     }
 
     public class SaveGameException : Exception
