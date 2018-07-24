@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using AirCoon.Game.Models;
 using AirCoon.Game.Handler;
 using AirCoon.Game.Models.Routing;
+using System.Runtime.Serialization;
 
 namespace AirCoon.Game.Models.Routing
 {
@@ -26,17 +27,17 @@ namespace AirCoon.Game.Models.Routing
             }
         }
         
-        public GroundPath(SerializationInfo info, StreamingContext ctxt);
+        public GroundPath(SerializationInfo info, StreamingContext ctxt)
         {
-              base.Connection = SaveGamePublic.Savegame.Connections[info.GetString("Connection")];
-              base._StandardCost = (Money) info.GetValue("StandardCost", typeof(Money))
+            base.Connection = SaveGamePublic.SaveGame.Connections[info.GetString("Connection")];
+            base._StandardCost = (Money)info.GetValue("StandardCost", typeof(Money));
         }
         
-        public void GetObjectData(SerializationInfo info, StreamingContext context)
+        public override void GetObjectData(SerializationInfo info, StreamingContext context)
         {
-            info.AddValue(base.Connection.Code);
-            info.AddValue(base._StandardCost);
-        };
+            info.AddValue("Connection", base.Connection.Code);
+            info.AddValue("StandardCost", base._StandardCost);
+        }
 
 
         public override void CalculateStandardCost()

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 using AirCoon.Game.Handler;
@@ -30,7 +31,7 @@ namespace AirCoon.Game.Models.Routing
 
         public Connection Connection;
 
-        public abstract Path(SerializationInfo info, StreamingContext ctxt);
+        //public abstract Path(SerializationInfo info, StreamingContext ctxt);
         public abstract void GetObjectData(SerializationInfo info, StreamingContext context);
         public abstract void CalculateStandardCost();
 

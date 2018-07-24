@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using AirCoon.Game.Models;
 using AirCoon.Game.Handler;
-
+using System.Runtime.Serialization;
 
 namespace AirCoon.Game.Models.Routing
 {
@@ -51,17 +51,17 @@ namespace AirCoon.Game.Models.Routing
         // Deserialiszer
         public Connection(SerializationInfo info, StreamingContext ctxt)
         {
-            this.Airport1 = SaveGamePublic.Savegame.Airports[info.GetString("Aiport1")];
-            this.Airport2 = SaveGamePublic.Savegame.Airports[info.GetString("Aiport2")];
+            this.Airport1 = SaveGamePublic.SaveGame.Airports[info.GetString("Aiport1")];
+            this.Airport2 = SaveGamePublic.SaveGame.Airports[info.GetString("Aiport2")];
         } // End Desieralizer
         
         // Serializer
         public void GetObjectData(SerializationInfo info, StreamingContext context)
         {
-            info.addValue("Airport1", this.Airport1.Iata);
-            info.addValue("Airport2", this.Airport2.Iata);
+            info.AddValue("Airport1", this.Airport1.Iata);
+            info.AddValue("Airport2", this.Airport2.Iata);
 
-        }} / end Serisalizer
+        } // end Serisalizer
 
         public Connection Register()
         {
