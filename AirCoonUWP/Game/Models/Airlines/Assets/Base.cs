@@ -32,15 +32,16 @@ namespace AirCoon.Game.Models.Airlines.Assets
         public Base() {
             _IsHub = true;
         }
-
-        public Base(Airport Aiport, bool ishub = true)
-        {
-
+        
+        public Base(SerializationInfo info, StreamingContext context) {
+            this._Airport = SaveGamePublic.SaveGame.Airports[info.GetString("Airport")];
+            this._IsHub = info.GetBool("IsHub");
         }
 
         void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context)
         {
-            throw new NotImplementedException();
+            info.AddValue("Airport", this.Airport.Iata);
+            info.addValue("IsHub", this.IsHub);
         }
 
         public void DailyTick(Tick CurrentTick)
