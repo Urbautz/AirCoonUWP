@@ -59,7 +59,16 @@ namespace AirCoon.Game.Models
 
         public static bool operator ==(Money m1, Money m2)
         {
-            return m1.Value == m2.Value;
+            if (m1 is null && m2 is null) return true;
+            else if (m1 is null) return false;
+            else if (m2 is null) return false;
+            else return m1.Value == m2.Value;
+            /*try { 
+                return m1.Value == m2.Value;
+            } catch(Exception e)
+            {
+                return true;
+            }*/
         }
         public static bool operator !=(Money m1, Money m2)
         {
