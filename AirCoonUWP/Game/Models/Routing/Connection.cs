@@ -9,19 +9,15 @@ using AirCoon.Game.Handler;
 
 namespace AirCoon.Game.Models.Routing
 {
-
+ [Serializable]
     public class Connection
+      : ISerializable
     {
 
         public readonly Airport Airport1;
         public readonly Airport Airport2;
 
-        public String Code {
-            get
-            {
-                return Airport1.Iata + Airport2.Iata;
-            }
-        }
+        public String Code { get { return Airport1.Iata + Airport2.Iata; }        }
 
         private Double _Distance = -1;
         public Double Distance
@@ -36,7 +32,7 @@ namespace AirCoon.Game.Models.Routing
             } // ENd Get Distance
         } // ENd Distance
 
-        public List<Path> Paths = new List<Path>();
+        public Dictionary<String, Path> Paths = new Dictionary<String, Path>();
 
 
         public Connection(Airport airport1, Airport airport2)
@@ -50,8 +46,22 @@ namespace AirCoon.Game.Models.Routing
                 this.Airport1 = airport2;
                 this.Airport2 = airport1;
             }
-
         } // End Constructor
+        
+        // Deserialiszer
+        public Connection(SerializationInfo info, StreamingContext ctxt)
+        {
+            this.Airport1 = SaveGamePublic.Savegame.Airports[info.GetString("Aiport1")];
+            this.Airport2 = SaveGamePublic.Savegame.Airports[info.GetString("Aiport2")];
+        } // End Desieralizer
+        
+        // Serializer
+        public void GetObjectData(SerializationInfo info, StreamingContext context)
+        {
+            info.addValue("Airport1", this.Airport1.Iata);
+            info.addValue("Airport2", this.Airport2.Iata);
+
+        }} / end Serisalizer
 
         public Connection Register()
         {

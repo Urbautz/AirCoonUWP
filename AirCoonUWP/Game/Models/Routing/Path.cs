@@ -10,6 +10,7 @@ namespace AirCoon.Game.Models.Routing
 {
 
     public abstract class Path
+        : ISerializable
     {
         public abstract String Code { get; }
         
@@ -29,6 +30,8 @@ namespace AirCoon.Game.Models.Routing
 
         public Connection Connection;
 
+        public abstract Path(SerializationInfo info, StreamingContext ctxt);
+        public abstract void GetObjectData(SerializationInfo info, StreamingContext context);
         public abstract void CalculateStandardCost();
 
     } // End class
