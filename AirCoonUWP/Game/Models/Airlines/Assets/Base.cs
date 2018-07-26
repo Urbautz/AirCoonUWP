@@ -20,14 +20,20 @@ namespace AirCoon.Game.Models.Airlines.Assets
         {
             get { return _Airport; }
         }
-
-        public Base(Airport airport)
-        {
-            this._Airport = airport;
-        }
-
+        
         private bool _IsHub = false;
         public bool IsHub { get { return _IsHub;} }
+        
+        protected String _Airline;
+        public Airline { get { return _Airline; } }
+
+        public Base(Airport airport, Airline airline;)
+        {
+            this._Airport = airport;
+            this._Airline = airline;
+        }
+
+
 
         public Base() {
             _IsHub = true;
@@ -35,12 +41,15 @@ namespace AirCoon.Game.Models.Airlines.Assets
         
         public Base(SerializationInfo info, StreamingContext context) {
             this._Airport = SaveGamePublic.SaveGame.Airports[info.GetString("Airport")];
+            this._Airline = info.GetString("Airline");
             this._IsHub = info.GetBool("IsHub");
+            
         }
 
         void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context)
         {
             info.AddValue("Airport", this.Airport.Iata);
+            info.AddValue("Airline", this._Airline);
             info.addValue("IsHub", this.IsHub);
         }
 
