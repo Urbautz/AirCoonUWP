@@ -35,10 +35,10 @@ namespace AirCoon.Game.Models.Aircraft
     
     public abstract class ICanOwnPlane {
     
-         public abstract String Code;
-         public abstract String DesignationCode;
+         public String Code;
+         public String DesignationCode;
         
-         public String GetNextDesignation();
+         public abstract String GetNextDesignation();
         
     } // End class ICanOwnPlane
     
@@ -53,7 +53,7 @@ namespace AirCoon.Game.Models.Aircraft
         public String Designation { get { return _Designation; } }
         
 
-        private String _Owner;
+        private ICanOwnPlane _Owner;
         public ICanOwnPlane Owner {
           get { return _Owner; }
         }
@@ -70,19 +70,19 @@ namespace AirCoon.Game.Models.Aircraft
             get { return _Position; }
         }
 
-        public Plane(Aircraft aircraft, ICanOwnPlane owner = null, Planestate planestate = Planestate.Ordered) 
+        public Plane(Aircraft aircraft, ICanOwnPlane owner = null, PlaneState planestate = PlaneState.Ordered) 
         {
-            this._Aircraft = aircraft;
-            if(owner == null) 
+            this.Aircraft = aircraft;
+            if (owner == null)
                 this._Owner = aircraft.Manufacturer;
             else
-                this.Owner = owner;
+                this._Owner = owner;
                 
             this._Designation = owner.GetNextDesignation();
-            this._Planestate = planestate;
+            this._PlaneState = planestate;
         }  // End Constructor
         
-        pubic Plane(SerializationInfo info, StreamingContext context) 
+        public Plane(SerializationInfo info, StreamingContext context) 
         {
             
         
@@ -91,8 +91,9 @@ namespace AirCoon.Game.Models.Aircraft
         public void GetObjectData(SerializationInfo info, StreamingContext context)
         {
             info.AddValue("Aircraft", Aircraft.Name);
-            info.AddValue("Owner", owner.Code);
-            WIE WIRD OWNER-Klasse bestimmt?
+            info.AddValue("Owner", this.Owner.Code);
+            info.AddValue("OwnerType", this.Owner.GetType());
+           // WIE WIRD OWNER-Klasse bestimmt?
         } // End Serializer
 
         public void MiniTick(Tick CurrentTick, int MiniTick)

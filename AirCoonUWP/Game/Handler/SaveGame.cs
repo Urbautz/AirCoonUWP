@@ -10,6 +10,7 @@ using AirCoon.Game.Models;
 using AirCoon.Game.Models.Geo;
 using AirCoon.Game.Models.Aircraft;
 using AirCoon.Game.Models.Routing;
+using AirCoon.Game.Models.Airlines;
 
 namespace AirCoon.Game.Handler
 {
@@ -34,7 +35,7 @@ namespace AirCoon.Game.Handler
 
         public Dictionary<String, Connection> Connections = new Dictionary<String, Connection>();
         public Dictionary<String, Models.Routing.Path> Paths = new Dictionary<String, Models.Routing.Path>();
-
+        public Dictionary<String, Airline> Airlines = new Dictionary<string, Airline>();
         /*
          
          */
