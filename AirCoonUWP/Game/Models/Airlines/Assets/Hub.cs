@@ -19,11 +19,18 @@ namespace Aircoon.Game.Models.Airlines.Assets
         public Hub(Airport airport)
         {
             base._Airport = airport;
+            base._IsHub = true;
+        }
+        
+        public Hub (SerializationInfo info, StreamingContext context) 
+        {
+            base._Airport = SaveGamePublic.SaveGame.Airports[info.GetString("Airport")];
+            base._IsHub = true;
         }
 
         public void GetObjectData(SerializationInfo info, StreamingContext context)
         {
-            throw new NotImplementedException();
+            info.AddValue("Airport", base.Airport.Iata);
         }
 
         public new void DailyTick(Tick CurrentTick)
