@@ -16,21 +16,25 @@ namespace Aircoon.Game.Models.Airlines.Assets
       : Base, ISerializable, IAmTickable
     {
 
-        public Hub(Airport airport)
+        public Hub(Airport airport, Airline airline)
         {
             base._Airport = airport;
+            base._Airline = airline.Iata;
             base._IsHub = true;
         }
         
         public Hub (SerializationInfo info, StreamingContext context) 
         {
             base._Airport = SaveGamePublic.SaveGame.Airports[info.GetString("Airport")];
+            base._Airline = info.GetString("Airline");
             base._IsHub = true;
         }
 
         public void GetObjectData(SerializationInfo info, StreamingContext context)
         {
             info.AddValue("Airport", base.Airport.Iata);
+            info.AddValue("Airline", base._Airline);
+            info.addValue("IsHub", base.IsHub);
         }
 
         public new void DailyTick(Tick CurrentTick)
