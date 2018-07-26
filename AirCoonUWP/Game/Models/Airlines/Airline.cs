@@ -28,19 +28,19 @@ namespace AirCoon.Game.Models.Airlines
             get { return _Name; }
         }
 
-        protected List<Hub> _Hub = new List<Hub>();
-        public List<Hub> Hub { get { return _Hub; } }
+        protected Dictionary<String, Hub> _Hubs = new Dictionary<String, Hub>();
+        public Dictionary<String, Hub> Hubs { get { return _Hubs; } }
 
-        protected List<Base> _Base = new List<Base>();
-        public List<Base> Base { get { return _Base; } }
+        protected List<Base> _Bases = new List<Base>();
+        public List<Base> Bases { get { return _Bases; } }
 
         public void Construct(String code, String name, Airport hub_airport)
         {
             this._Code = code;
             this._Name = Name;
             Hub hub = new Hub(hub_airport);
-            this._Hub.Add(hub);
-            this._Base.Add(hub); 
+            this._Hubs.Add(hub.Airport.Iata, hub);
+            this._Bases.Add(hub); 
         }
 
 

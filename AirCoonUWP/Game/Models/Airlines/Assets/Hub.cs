@@ -19,7 +19,7 @@ namespace Aircoon.Game.Models.Airlines.Assets
         public Hub(Airport airport, Airline airline)
         {
             base._Airport = airport;
-            base._Airline = airline.Iata;
+            base._Airline = airline.Code;
             base._IsHub = true;
         }
         
@@ -30,11 +30,16 @@ namespace Aircoon.Game.Models.Airlines.Assets
             base._IsHub = true;
         }
 
+        public Hub(Airport hub_airport)
+        {
+            throw new NotImplementedException();
+        }
+
         public void GetObjectData(SerializationInfo info, StreamingContext context)
         {
             info.AddValue("Airport", base.Airport.Iata);
             info.AddValue("Airline", base._Airline);
-            info.addValue("IsHub", base.IsHub);
+            info.AddValue("IsHub", base.IsHub);
         }
 
         public new void DailyTick(Tick CurrentTick)

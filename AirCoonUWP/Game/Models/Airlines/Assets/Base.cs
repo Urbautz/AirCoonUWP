@@ -21,7 +21,7 @@ namespace AirCoon.Game.Models.Airlines.Assets
             get { return _Airport; }
         }
         
-        private bool _IsHub = false;
+        protected bool _IsHub = false;
         public bool IsHub { get { return _IsHub;} }
         
         protected String _Airline;
@@ -42,7 +42,7 @@ namespace AirCoon.Game.Models.Airlines.Assets
         public Base(SerializationInfo info, StreamingContext context) {
             this._Airport = SaveGamePublic.SaveGame.Airports[info.GetString("Airport")];
             this._Airline = info.GetString("Airline");
-            this._IsHub = info.GetBool("IsHub");
+            this._IsHub = info.GetBoolean("IsHub");
             
         }
 
@@ -50,7 +50,7 @@ namespace AirCoon.Game.Models.Airlines.Assets
         {
             info.AddValue("Airport", this.Airport.Iata);
             info.AddValue("Airline", this._Airline);
-            info.addValue("IsHub", this.IsHub);
+            info.AddValue("IsHub", this.IsHub);
         }
 
         public void DailyTick(Tick CurrentTick)

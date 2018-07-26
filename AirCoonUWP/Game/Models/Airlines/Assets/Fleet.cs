@@ -4,6 +4,7 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
+using Aircoon.Game.Models.Airlines.Assets;
 using AirCoon.Game.Handler;
 using AirCoon.Game.Models;
 using AirCoon.Game.Models.Aircraft;
@@ -19,7 +20,7 @@ namespace AirCoon.Game.Models.Airlines.Assets
         public String Name { get { return _Name; }  }
 
         private String _Hub;
-        public Hub Hub { get { return this.Airline.Hubs[_Hub] }  }
+        public Hub Hub { get { return this.Airline.Hubs[_Hub]; }  }
 
         private String _Airline;
         public Airline Airline { get { return SaveGamePublic.SaveGame.Airlines[_Airline]; }  }
@@ -28,19 +29,19 @@ namespace AirCoon.Game.Models.Airlines.Assets
 
         public Fleet(Airline airline, Hub hub, String name = null)
         {
-            if(name == null) name = airline.code + " - " + Hub.Airport.Iata;   
+            if(name == null) name = airline.Code + " - " + Hub.Airport.Iata;   
             this._Name = name;
-            this_Hub = hub.Airport.Iata;
+            this._Hub = hub.Airport.Iata;
             this._Airline = airline.Code;
-            this.Planes = new Dictionary<String, Plane>;
+            this.Planes = new Dictionary<String, Plane>();
         }
 
-        public void Fleet(SerializationInfo info, StreamingContext context)
+        public Fleet(SerializationInfo info, StreamingContext context)
         {
             this._Name = info.GetString("Name");
             this._Airline = info.GetString("Airline");
             this._Hub = info.GetString("Hub");
-            this.Planes = (List<Plane>) info.GetValue("Planes", typeof(List<Plane>));
+            Planes = (Dictionary<String, Plane>) info.GetValue("Planes", typeof(Dictionary<String, Plane>));
         }
 
         public void GetObjectData(SerializationInfo info, StreamingContext context)
