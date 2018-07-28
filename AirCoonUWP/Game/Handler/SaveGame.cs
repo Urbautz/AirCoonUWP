@@ -10,6 +10,7 @@ using AirCoon.Game.Models;
 using AirCoon.Game.Models.Geo;
 using AirCoon.Game.Models.Aircraft;
 using AirCoon.Game.Models.Routing;
+using AirCoon.Game.Models.Airlines;
 
 namespace AirCoon.Game.Handler
 {
@@ -34,7 +35,7 @@ namespace AirCoon.Game.Handler
 
         public Dictionary<String, Connection> Connections = new Dictionary<String, Connection>();
         public Dictionary<String, Models.Routing.Path> Paths = new Dictionary<String, Models.Routing.Path>();
-
+        public Dictionary<String, Airline> Airlines = new Dictionary<string, Airline>();
         /*
          
          */
@@ -296,7 +297,6 @@ namespace AirCoon.Game.Handler
                 dic = csv.GetNextLineHeaders();
             }
 
-
             Debug.Write("Load complete", 1);
             this.Save();
             
@@ -356,6 +356,7 @@ namespace AirCoon.Game.Handler
                 bformatter.Serialize(stream, this.Airports);
                 stream.Close();
             }
+
             // Loadtest Airport
             /*this.Airports = null;
             Stream stream2 = File.Open(this.ConcreteSaveGameFolder + "\\airports.dat", FileMode.Open);
@@ -376,19 +377,38 @@ namespace AirCoon.Game.Handler
             Debug.Write("Manufacturerloader test: " + this.Manufacturers.Count);
             Console.ReadLine();*/
 
-
+            // Saving Aircraft
             Debug.Write("Saving Aircraft", 2);
             using (Stream stream = File.Open(this.ConcreteSaveGameFolder + "\\aircraft.dat", FileMode.Create))
             {
                 bformatter.Serialize(stream, this.Aircrafts);
                 stream.Close();
             }
-            //Loadtest Manufacturers
+            /*//Loadtest Aircraft
             this.Aircrafts = null;
             Stream stream2 = File.Open(this.ConcreteSaveGameFolder + "\\aircraft.dat", FileMode.Open);
             this.Aircrafts = (Dictionary<string, Aircraft>)bformatter.Deserialize(stream2);
             Debug.Write("Manufacturerloader test: " + this.Aircrafts.Count);
             Console.ReadLine();
+            */
+
+            // Load Connection & Path
+            Debug.Write("Saving Connections", 2);
+            using (Stream stream = File.Open(this.ConcreteSaveGameFolder + "\\connection.dat", FileMode.Create))
+            {
+                bformatter.Serialize(stream, this.Connections);
+                stream.Close();
+            }
+            //Loadtest Connections
+            /*this.Connections = null;
+            this.Paths = null;
+            this.Paths = new Dictionary<string, Models.Routing.Path>();
+            Stream stream2 = File.Open(this.ConcreteSaveGameFolder + "\\connection.dat", FileMode.Open);
+            this.Connections = (Dictionary<string, Connection>)bformatter.Deserialize(stream2);
+            Debug.Write("Connection loader test: " + this.Connections.Count + "," + this.Paths.Count);
+            Console.ReadLine();
+            */
+
 
 
             Debug.Write("Saved!", 1);

@@ -15,29 +15,29 @@ namespace AirCoon.Game.Models.Aircraft
         : ISerializable
     {
     
-        readonly String Name;
-        readonly Manufacturer Manufacturer;
-        readonly String Family;
-        readonly int Rating;
-        
-        readonly int Speed;
-        readonly int FuelClimb;
-        readonly int FuelTaxi;
-        readonly int FuelHour;
-        
-        readonly int Range;
-        readonly int RunwayMinLength;
-        
-        readonly int CabinWidth;
-        readonly int CabinLength;
-        readonly int MaxSeat;
-        
-        readonly Money ListPrice;
-        readonly int CostProduction;
-        
-        readonly int WearTakeoff;
-        readonly int WearFlightHour;
-        readonly int MaxHealth;
+        public readonly String Name;
+        public readonly Manufacturer Manufacturer;
+        public readonly String Family;
+        public readonly int Rating;
+
+        public readonly int Speed;
+        public readonly int FuelClimb;
+        public readonly int FuelTaxi;
+        public readonly int FuelHour;
+
+        public readonly int Range;
+        public readonly int RunwayMinLength;
+
+        public readonly int CabinWidth;
+        public readonly int CabinLength;
+        public readonly int MaxSeat;
+
+        public readonly Money ListPrice;
+        public readonly int CostProduction;
+
+        public readonly int WearTakeoff;
+        public readonly int WearFlightHour;
+        public readonly int MaxHealth;
         
       
             
@@ -98,7 +98,7 @@ namespace AirCoon.Game.Models.Aircraft
             this.WearFlightHour = info.GetInt32("WearFlightHour");
             this.MaxHealth      = info.GetInt32("MaxHealth");   
         } // End Deserializer
-        
+
         // Serialiszer
         public void GetObjectData(SerializationInfo info, StreamingContext ctxt)
         {

@@ -13,7 +13,7 @@ namespace AirCoon.Game.Models.Aircraft
 {
     [Serializable()]
     public class Manufacturer
-        : ISerializable, IAmTickable
+        : ICanOwnPlane, ISerializable, IAmTickable
     {
     
         private String _Name;
@@ -90,6 +90,10 @@ namespace AirCoon.Game.Models.Aircraft
 
         public void YearlyTick(Tick CurrentTick){
         } // End YearlyTick
-          
+
+        public override string GetNextDesignation()
+        {
+            throw new NotImplementedException();
+        }
     } // End Class
 } // End Namespace
