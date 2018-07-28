@@ -30,10 +30,6 @@ namespace Aircoon.Game.Models.Airlines.Assets
             base._IsHub = true;
         }
 
-        public Hub(Airport hub_airport)
-        {
-            throw new NotImplementedException();
-        }
 
         public void GetObjectData(SerializationInfo info, StreamingContext context)
         {

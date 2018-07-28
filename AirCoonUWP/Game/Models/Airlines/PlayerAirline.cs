@@ -5,23 +5,43 @@ using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 using Aircoon.Game.Models.Airlines;
+using Aircoon.Game.Models.Airlines.Assets;
 using AirCoon.Game.Handler;
 using AirCoon.Game.Models;
+using AirCoon.Game.Models.Airlines.Assets;
 
 namespace AirCoon.Game.Models.Airlines
 {
+    [Serializable]
     public class PlayerAirline
         : Airline
     {
+        static Money startmoney = new Money(10000000000);
 
         public PlayerAirline(String code, String name, Airport hub)
         {
-            base.Construct(code, name, hub);
+            List<Airport> hubs = new List<Airport> { hub };
+            base.CreateSubClass(code, name, hubs, startmoney);
+        }
+
+        public PlayerAirline(SerializationInfo info, StreamingContext context)
+        {
+
+            base.DeserializeSubClass(
+                            info.GetString("Code"),
+                            info.GetString("Name"),
+                            (Dictionary < String, Hub > ) info.GetValue("Hubs", typeof(Dictionary<String,Hub>) ),
+                            (List<Base>) info.GetValue("Bases", typeof(List<Base>) ) 
+                );
         }
 
         public override void GetObjectData(SerializationInfo info, StreamingContext context)
         {
-            throw new NotImplementedException();
+            info.AddValue("Code", base.Code);
+            info.AddValue("Name", base.Name);
+            info.AddValue("Hubs", base.Hubs);
+            info.AddValue("Bases", base.Bases);
+            
         }
 
         public override void DailyTick(Tick CurrentTick)

@@ -35,7 +35,26 @@ namespace AirCoon.Game.Handler
 
         public Dictionary<String, Connection> Connections = new Dictionary<String, Connection>();
         public Dictionary<String, Models.Routing.Path> Paths = new Dictionary<String, Models.Routing.Path>();
-        public Dictionary<String, Airline> Airlines = new Dictionary<string, Airline>();
+
+        public Dictionary<String, Airline> AirlinesEnemy = new Dictionary<string, Airline>();
+        public Airline AirlinePlayer;
+        private Dictionary<String, Airline> _AirlinesAll = null;
+        public Dictionary<String, Airline> AirlinesAll
+        {
+            get
+            {
+                if (AirlinesAll == null)
+                {
+                    _AirlinesAll = new Dictionary<string, Airline>();
+                    _AirlinesAll.Add(AirlinePlayer.Code, AirlinePlayer);
+                    foreach (KeyValuePair<string, Airline> kv in AirlinesEnemy)
+                    {
+                        _AirlinesAll.Add(kv.Key, kv.Value);
+                    }
+                }
+                return _AirlinesAll;
+            }
+        } // End Airlinesall
         /*
          
          */
@@ -143,7 +162,7 @@ namespace AirCoon.Game.Handler
             // Check letters
             string pattern = @"^[a-zA-Z]+$";
             Regex regex = new Regex(pattern);
-            if (!regex.IsMatch(code))
+            if (!regex.IsMatch(code) )
             {
                 throw new SaveGameException("Code " + code + " is not valid.");
             }
@@ -151,12 +170,12 @@ namespace AirCoon.Game.Handler
 
             // Check Savegamefolder
 
-            if (Directory.Exists(SaveGameFolder + "\\" + code))
+            if (code == "CON" || Directory.Exists(SaveGameFolder + "\\" + code))
             {
                 throw new SaveGameException("Savegame" + code + " already exists.");
             }
 
-            // Create directory
+            // Create Directory
             //Debug.Write("Creating Directory: " + SaveGameFolder + "\\" + code, 2);
             ConcreteSaveGameFolder = SaveGameFolder + "\\" + code;
             Directory.CreateDirectory(ConcreteSaveGameFolder);
@@ -213,7 +232,7 @@ namespace AirCoon.Game.Handler
                 line = csv.GetNextLine();
             }
 
-            //Regionen und Flughäfen laden.
+            // Initalize Airports
             Debug.Write("Loading Airports", 3);
 
             stream = new StreamReader(ConfigPath + "\\airports.dat");
@@ -296,6 +315,11 @@ namespace AirCoon.Game.Handler
                 Aircraft A = new Aircraft(dic);
                 dic = csv.GetNextLineHeaders();
             }
+
+            Debug.Write("Creating Player Airline");
+            this.AirlinePlayer = new PlayerAirline(code, name, this.Airports[hub]);
+
+
 
             Debug.Write("Load complete", 1);
             this.Save();
@@ -408,7 +432,19 @@ namespace AirCoon.Game.Handler
             Debug.Write("Connection loader test: " + this.Connections.Count + "," + this.Paths.Count);
             Console.ReadLine();
             */
-
+            Debug.Write("Saving Playerairline", 2);
+            using (Stream stream = File.Open(this.ConcreteSaveGameFolder + "\\playerairline.dat", FileMode.Create))
+            {
+                bformatter.Serialize(stream, this.AirlinePlayer);
+                stream.Close();
+            }
+            //Loadtest Playerairline
+            this.AirlinePlayer = null;
+            Stream stream2 = File.Open(this.ConcreteSaveGameFolder + "\\playerairline.dat", FileMode.Open);
+            this.AirlinePlayer = (PlayerAirline)bformatter.Deserialize(stream2);
+            Debug.Write("Playerairline: " + this.AirlinePlayer);
+            Console.ReadLine();
+            
 
 
             Debug.Write("Saved!", 1);
