@@ -23,7 +23,7 @@ namespace AirCoon.Game.Models.Airlines.Assets
         public Hub Hub { get { return this.Airline.Hubs[_Hub]; }  }
 
         private String _Airline;
-        public Airline Airline { get { return SaveGamePublic.SaveGame.Airlines[_Airline]; }  }
+        public Airline Airline { get { return SaveGamePublic.SaveGame.AirlinesAll[_Airline]; }  }
         
         public Dictionary<String, Plane> Planes;
 

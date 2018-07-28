@@ -34,13 +34,29 @@ namespace AirCoon.Game.Models.Airlines
         protected List<Base> _Bases = new List<Base>();
         public List<Base> Bases { get { return _Bases; } }
 
-        public void Construct(String code, String name, Airport hub_airport)
+        
+        public void CreateSubClass(String code, String name, List<Airport> hub_airports, Money startmoney = null)
         {
             this._Code = code;
             this._Name = Name;
-            Hub hub = new Hub(hub_airport);
-            this._Hubs.Add(hub.Airport.Iata, hub);
-            this._Bases.Add(hub); 
+            foreach (Airport hub_airport in hub_airports)
+            {
+                Hub hub = new Hub(hub_airport, this);
+                this._Hubs.Add(hub.Airport.Iata, hub);
+                this._Bases.Add(hub);
+            }
+            
+        }
+
+        public void DeserializeSubClass(String code, String name,
+            Dictionary<String, Hub> hubs,
+            List<Base> bases,
+            Money cash = null)
+        {
+            this._Code = code;
+            this._Name = Name;
+            this._Hubs = hubs;
+            this._Bases = bases;
         }
 
 
