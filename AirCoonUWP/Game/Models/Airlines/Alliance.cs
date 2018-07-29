@@ -1,4 +1,5 @@
 ﻿using AirCoon.Game.Models.Airlines;
+using AirCoon.Game.Handler;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,6 +26,8 @@ namespace AirCoon.Game.Models.Airlines
         public Alliance(String name)
         {
             this.Name = name;
+            SaveGamePublic.SaveGame.Alliances.Add(this.Code, this);
+
         }
 
         public Alliance(SerializationInfo info, StreamingContext context)

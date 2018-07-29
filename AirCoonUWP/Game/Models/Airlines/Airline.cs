@@ -34,13 +34,24 @@ namespace AirCoon.Game.Models.Airlines
         protected List<Base> _Bases = new List<Base>();
         public List<Base> Bases { get { return _Bases; } }
 
-        public Alliance Alliance;
+        private Alliance _Alliance_INT;
+        protected Alliance _Alliance
+        { get { return _Alliance_INT; }
+            set
+            {
+                this._Alliance_INT = value;
+                if(this._Alliance_INT != null)
+                    value.Members.Add(this.Code, this);
+            }
+        }
+        public Alliance Alliance { get { return _Alliance; } }
 
         
-        public void CreateSubClass(String code, String name, List<Airport> hub_airports, Money startmoney = null)
+        public void CreateSubClass(String code, String name, List<Airport> hub_airports, Alliance alliance, Money startmoney = null)
         {
             this._Code = code;
             this._Name = Name;
+            this._Alliance = alliance;
             foreach (Airport hub_airport in hub_airports)
             {
                 Hub hub = new Hub(hub_airport, this);
@@ -60,7 +71,7 @@ namespace AirCoon.Game.Models.Airlines
             this._Name = Name;
             this._Hubs = hubs;
             this._Bases = bases;
-            this.Alliance = alliance;
+            this._Alliance = alliance;
         }
 
 

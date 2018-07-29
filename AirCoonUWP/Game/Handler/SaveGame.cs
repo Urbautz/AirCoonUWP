@@ -20,7 +20,7 @@ namespace AirCoon.Game.Handler
 
         private List<String> AllSaveGameNames;
         private String SaveGameFolder;
-        private String[] SaveGamePath = new String[] { "AirCoon", "saves"};
+        private String[] SaveGamePath = new String[] { "AirCoon", "saves" };
         private String ConcreteSaveGameFolder;
         private String ConfigPath;
 
@@ -38,6 +38,7 @@ namespace AirCoon.Game.Handler
 
         public Dictionary<String, Airline> AirlinesEnemy = new Dictionary<string, Airline>();
         public Airline AirlinePlayer;
+        /*
         private Dictionary<String, Airline> _AirlinesAll = null;
         public Dictionary<String, Airline> AirlinesAll
         {
@@ -54,10 +55,19 @@ namespace AirCoon.Game.Handler
                 }
                 return _AirlinesAll;
             }
-        } // End Airlinesall
-        /*
-         
-         */
+        } // End Airlinesall 
+        */
+        public Airline GetAirline(String code)
+        {
+            if (code == this.AirlinePlayer.Code)
+                return this.AirlinePlayer;
+            return this.AirlinesEnemy[code];
+        }
+
+        public Dictionary<String, Alliance> Alliances = new Dictionary<string, Alliance>();
+
+
+
         public SaveGame()
         {
 
@@ -316,6 +326,17 @@ namespace AirCoon.Game.Handler
                 dic = csv.GetNextLineHeaders();
             }
 
+            Debug.Write("Loading Alliances");
+            stream = new StreamReader(ConfigPath + "\\alliance.dat");
+            csv = new DataCsvLoader(stream, false, true);
+            dic = csv.GetNextLineHeaders(1);
+            while (dic != null)
+            {
+                Alliance a = new Alliance(dic["Name"]);
+                dic = csv.GetNextLineHeaders(1);
+            }
+
+
             Debug.Write("Creating Player Airline");
             this.AirlinePlayer = new PlayerAirline(code, name, this.Airports[hub]);
 
@@ -325,6 +346,11 @@ namespace AirCoon.Game.Handler
             this.Save();
             
         } // End constructor 
+
+
+
+
+
 
         /* will load an existing savegame, to be called by the Constructors */
         private void Load(String savegamename)
@@ -432,18 +458,39 @@ namespace AirCoon.Game.Handler
             Debug.Write("Connection loader test: " + this.Connections.Count + "," + this.Paths.Count);
             Console.ReadLine();
             */
+
+            Debug.Write("Saving Alliance", 2);
+            using (Stream stream = File.Open(this.ConcreteSaveGameFolder + "\\alliances.dat", FileMode.Create))
+            {
+                bformatter.Serialize(stream, this.Alliances);
+                stream.Close();
+            }
+            /*
+            //Loadtest Alliances
+            this.Alliances = null;
+            Stream stream2 = File.Open(this.ConcreteSaveGameFolder + "\\alliances.dat", FileMode.Open);
+            this.Alliances = (Dictionary<String, Alliance>) bformatter.Deserialize(stream2);
+            Debug.Write("Playerairline: " + this.AirlinePlayer);
+            Console.ReadLine();
+            */
+
+
+
             Debug.Write("Saving Playerairline", 2);
             using (Stream stream = File.Open(this.ConcreteSaveGameFolder + "\\playerairline.dat", FileMode.Create))
             {
                 bformatter.Serialize(stream, this.AirlinePlayer);
                 stream.Close();
             }
+
+            /*
             //Loadtest Playerairline
             this.AirlinePlayer = null;
             Stream stream2 = File.Open(this.ConcreteSaveGameFolder + "\\playerairline.dat", FileMode.Open);
             this.AirlinePlayer = (PlayerAirline)bformatter.Deserialize(stream2);
             Debug.Write("Playerairline: " + this.AirlinePlayer);
             Console.ReadLine();
+            */
             
 
 
