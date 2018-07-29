@@ -34,6 +34,8 @@ namespace AirCoon.Game.Models.Airlines
         protected List<Base> _Bases = new List<Base>();
         public List<Base> Bases { get { return _Bases; } }
 
+        public Alliance Alliance;
+
         
         public void CreateSubClass(String code, String name, List<Airport> hub_airports, Money startmoney = null)
         {
@@ -51,12 +53,14 @@ namespace AirCoon.Game.Models.Airlines
         public void DeserializeSubClass(String code, String name,
             Dictionary<String, Hub> hubs,
             List<Base> bases,
+            Alliance alliance,
             Money cash = null)
         {
             this._Code = code;
             this._Name = Name;
             this._Hubs = hubs;
             this._Bases = bases;
+            this.Alliance = alliance;
         }
 
 

@@ -31,7 +31,8 @@ namespace AirCoon.Game.Models.Airlines
                             info.GetString("Code"),
                             info.GetString("Name"),
                             (Dictionary < String, Hub > ) info.GetValue("Hubs", typeof(Dictionary<String,Hub>) ),
-                            (List<Base>) info.GetValue("Bases", typeof(List<Base>) ) 
+                            (List<Base>) info.GetValue("Bases", typeof(List<Base>) ), 
+                            (Alliance) info.GetValue("Alliance", typeof(Alliance))
                 );
         }
 
@@ -41,6 +42,7 @@ namespace AirCoon.Game.Models.Airlines
             info.AddValue("Name", base.Name);
             info.AddValue("Hubs", base.Hubs);
             info.AddValue("Bases", base.Bases);
+            info.AddValue("Alliance", base.Alliance);
             
         }
 
