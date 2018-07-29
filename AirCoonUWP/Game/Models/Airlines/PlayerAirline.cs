@@ -21,7 +21,7 @@ namespace AirCoon.Game.Models.Airlines
         public PlayerAirline(String code, String name, Airport hub)
         {
             List<Airport> hubs = new List<Airport> { hub };
-            base.CreateSubClass(code, name, hubs, startmoney);
+            base.CreateSubClass(code, name, hubs, null, startmoney);
         }
 
         public PlayerAirline(SerializationInfo info, StreamingContext context)
@@ -32,7 +32,7 @@ namespace AirCoon.Game.Models.Airlines
                             info.GetString("Name"),
                             (Dictionary < String, Hub > ) info.GetValue("Hubs", typeof(Dictionary<String,Hub>) ),
                             (List<Base>) info.GetValue("Bases", typeof(List<Base>) ), 
-                            (Alliance) info.GetValue("Alliance", typeof(Alliance))
+                            SaveGamePublic.SaveGame.Alliances[info.GetString("Alliance")]
                 );
         }
 
@@ -42,7 +42,7 @@ namespace AirCoon.Game.Models.Airlines
             info.AddValue("Name", base.Name);
             info.AddValue("Hubs", base.Hubs);
             info.AddValue("Bases", base.Bases);
-            info.AddValue("Alliance", base.Alliance);
+            info.AddValue("Alliance", base.Alliance.Code);
             
         }
 
