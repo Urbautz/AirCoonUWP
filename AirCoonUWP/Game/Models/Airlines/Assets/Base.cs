@@ -25,9 +25,7 @@ namespace AirCoon.Game.Models.Airlines.Assets
         public bool IsHub { get { return _IsHub;} }
         
         protected String _Airline;
-        public Airline Airline { get {
-                return SaveGamePublic.SaveGame.AirlinesAll[_Airline];
-            } }
+        public Airline Airline { get { return SaveGamePublic.SaveGame.GetAirline(_Airline); } }
 
         public Base(Airport airport, Airline airline)
         {
