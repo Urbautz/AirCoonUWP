@@ -140,6 +140,7 @@
     <Compile Include="Game\Models\Aircraft\Plane.cs" />
     <Compile Include="Game\Models\Aircraft\ProductionLine.cs" />
     <Compile Include="Game\Models\Airlines\Airline.cs" />
+    <Compile Include="Game\Models\Airlines\Alliance.cs" />
     <Compile Include="Game\Models\Airlines\Assets\Base.cs" />
     <Compile Include="Game\Models\Airlines\Assets\Hub.cs" />
     <Compile Include="Game\Models\Airlines\EnemyAirline.cs" />
@@ -181,6 +182,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Data\aircraft.dat">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\alliance.dat">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
