@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 using AirCoon.Game.Handler;
@@ -12,8 +13,9 @@ namespace AirCoon.Game.Models.Routing
     public abstract class Path
         : ISerializable
     {
-        public abstract String Code { get; }
-        
+
+        protected String _Code;
+        public String Code { get { return _Code; } }
 
         protected Money _StandardCost;
         public Money StandardCost
@@ -28,11 +30,21 @@ namespace AirCoon.Game.Models.Routing
             } // end get
         }// end Get/Set StandardCost
 
-        public Connection Connection;
+        protected String _ConnectionCode;
 
-        public abstract Path(SerializationInfo info, StreamingContext ctxt);
+        public Connection Connection
+        {
+            get { return SaveGamePublic.SaveGame.Connections[_ConnectionCode]; }
+        }
+
+        //public abstract Path(SerializationInfo info, StreamingContext ctxt);
         public abstract void GetObjectData(SerializationInfo info, StreamingContext context);
         public abstract void CalculateStandardCost();
+
+        public void Register()
+        {
+
+        }
 
     } // End class
 } // End Namespace

@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using AirCoon.Game.Handler;
 using AirCoon.Game.Models.Aircraft;
-using AirCoonUWP.Game.Models.Airline;
+using AirCoon.Game.Models.Airlines;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
 
@@ -19,6 +19,7 @@ namespace AirCoon.Game.Models.Aircraft
     {
         Ordered,
         InProduction,
+        InStock,
         Maintenance,
         Idle,
         Preparation,
@@ -30,6 +31,17 @@ namespace AirCoon.Game.Models.Aircraft
         TaxitoTerminal,
         DeBoarding
     }
+    
+    
+    public abstract class ICanOwnPlane {
+    
+         public String Code;
+         public String DesignationCode;
+        
+         public abstract String GetNextDesignation();
+        
+    } // End class ICanOwnPlane
+    
 
     [Serializable()]
     public class Plane 
@@ -37,11 +49,13 @@ namespace AirCoon.Game.Models.Aircraft
     {
 
         readonly Aircraft Aircraft;
+        private readonly String _Designation;
+        public String Designation { get { return _Designation; } }
+        
 
-        private Fleet _Fleet;
-        public Fleet Fleet {
-          get { return _Fleet; }
-          set { this._Fleet = value; }
+        private ICanOwnPlane _Owner;
+        public ICanOwnPlane Owner {
+          get { return _Owner; }
         }
 
         private PlaneState _PlaneState;
@@ -56,12 +70,31 @@ namespace AirCoon.Game.Models.Aircraft
             get { return _Position; }
         }
 
-
+        public Plane(Aircraft aircraft, ICanOwnPlane owner = null, PlaneState planestate = PlaneState.Ordered) 
+        {
+            this.Aircraft = aircraft;
+            if (owner == null)
+                this._Owner = aircraft.Manufacturer;
+            else
+                this._Owner = owner;
+                
+            this._Designation = owner.GetNextDesignation();
+            this._PlaneState = planestate;
+        }  // End Constructor
+        
+        public Plane(SerializationInfo info, StreamingContext context) 
+        {
+            
+        
+        } // End Deserializier
 
         public void GetObjectData(SerializationInfo info, StreamingContext context)
         {
-            throw new NotImplementedException();
-        }
+            info.AddValue("Aircraft", Aircraft.Name);
+            info.AddValue("Owner", this.Owner.Code);
+            info.AddValue("OwnerType", this.Owner.GetType());
+           // WIE WIRD OWNER-Klasse bestimmt?
+        } // End Serializer
 
         public void MiniTick(Tick CurrentTick, int MiniTick)
         {

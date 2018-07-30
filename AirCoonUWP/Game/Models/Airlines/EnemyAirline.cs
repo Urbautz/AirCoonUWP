@@ -4,9 +4,11 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
+using Aircoon.Game.Models.Airlines;
 using AirCoon.Game.Handler;
+using AirCoon.Game.Models;
 
-namespace AirCoonUWP.Game.Models.Airline
+namespace AirCoon.Game.Models.Airlines
 {
     public class EnemyAirline
         : Airline

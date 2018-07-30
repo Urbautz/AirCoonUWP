@@ -21,11 +21,11 @@ namespace AirCoon.Game.Handler
             {
                 LastLine = Stream.ReadLine();
             } else if (firstlineisheaders) {
-                Headers = this.GetNextLine();
+                Headers = this.GetNextLine(1);
             }
         }
 
-        public String[] GetNextLine(int minElements = 2)
+        public String[] GetNextLine(int minElements = 1)
         {
             PrevLine = LastLine;
             LastLine = Stream.ReadLine();
@@ -53,7 +53,7 @@ namespace AirCoon.Game.Handler
             
         }
 
-        public Dictionary<string, string> GetNextLineHeaders(int minElements = 2)
+        public Dictionary<string, string> GetNextLineHeaders(int minElements = 1)
         {
             String[] data = this.GetNextLine(minElements);
 

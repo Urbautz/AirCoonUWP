@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using AirCoon.Game.Models;
 using AirCoon.Game.Handler;
 using AirCoon.Game.Models.Routing;
+using System.Runtime.Serialization;
 
 namespace AirCoon.Game.Models.Routing
 {
@@ -13,31 +14,33 @@ namespace AirCoon.Game.Models.Routing
     public class GroundPath : Path
     {
 
-        public override string Code => Connection.Code+"G";
-
 
         public GroundPath(Connection connection)
         {
-            this.Connection = connection;
+            this._ConnectionCode = connection.Code;
+            base._Code = Connection.Code + "G";
             if (!SaveGamePublic.SaveGame.Paths.ContainsKey(this.Code))
             {
                 SaveGamePublic.SaveGame.Paths.Add(this.Code, this);
-                Connection.Paths.Add(this.Code, this);
+                base.Connection.Paths.Add(this.Code, this);
             }
         }
         
-        public GroundPath(SerializationInfo info, StreamingContext ctxt);
+        public GroundPath(SerializationInfo info, StreamingContext ctxt)
         {
-              base.Connection = SaveGamePublic.Savegame.Connections[info.GetString("Connection")];
-              base._StandardCost = (Money) info.GetValue("StandardCost", typeof(Money))
+            base._ConnectionCode = info.GetString("ConnectionCode");
+            base._Code = base._ConnectionCode + "G";
+            base._StandardCost = (Money)info.GetValue("StandardCost", typeof(Money));
+            SaveGamePublic.SaveGame.Paths.Add(this.Code, this);
         }
         
-        public void GetObjectData(SerializationInfo info, StreamingContext context)
+        public override void GetObjectData(SerializationInfo info, StreamingContext context)
         {
-            info.AddValue(base.Connection.Code);
-            info.AddValue(base._StandardCost);
-        };
+            info.AddValue("ConnectionCode", base._ConnectionCode);
+            info.AddValue("StandardCost", base._StandardCost);
+        }
 
+        
 
         public override void CalculateStandardCost()
         {
