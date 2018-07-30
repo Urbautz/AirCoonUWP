@@ -49,6 +49,10 @@ namespace AirCoon.Game.Handler
                 Stream.Close();
                 return null;
             }     
+            for(int i = 0; i < splitted.Length; i++){
+                if(splitted[i] == "_NULL_")
+                    splitted[i] = null;
+            }
             return splitted;
             
         }
