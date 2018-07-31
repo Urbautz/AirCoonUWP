@@ -38,11 +38,7 @@ namespace AirCoon.Game.Models.Airlines
 
         public override void GetObjectData(SerializationInfo info, StreamingContext context)
         {
-            info.AddValue("Code", base.Code);
-            info.AddValue("Name", base.Name);
-            info.AddValue("Hubs", base.Hubs);
-            info.AddValue("Bases", base.Bases);
-            info.AddValue("Alliance", base.Alliance.Code);
+            base.SerializeSubClass(info, context);
             
         }
 
