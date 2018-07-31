@@ -27,13 +27,7 @@ namespace AirCoon.Game.Models.Airlines
         public PlayerAirline(SerializationInfo info, StreamingContext context)
         {
 
-            base.DeserializeSubClass(
-                            info.GetString("Code"),
-                            info.GetString("Name"),
-                            (Dictionary < String, Hub > ) info.GetValue("Hubs", typeof(Dictionary<String,Hub>) ),
-                            (List<Base>) info.GetValue("Bases", typeof(List<Base>) ), 
-                            SaveGamePublic.SaveGame.Alliances[info.GetString("Alliance")]
-                );
+            base.DeserializeSubClass(info, context);
         }
 
         public override void GetObjectData(SerializationInfo info, StreamingContext context)
