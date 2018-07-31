@@ -23,17 +23,53 @@ namespace AirCoon.Game.Models.Airlines
         private int _QuoteNationalPlanned;
         private int _QualityLevelPlanned;
          
-        private String [] AllowedAircraftTypes;
+        private List<String> AllowedAircraftTypes;
 
         private EnemyAirline(String[] data) {
-            base._Code = data["Code"];
-            base._Name = data["Name"];
+            base.CreateSubClass 
+            (
+                data["Code"], 
+                data["name"],
+                new List<Airport> { SaveGamePublic.SaveGame.Airports[data["Mainhub"]] }, 
+                new Money(decimal.Parse(data["Money"]))
+            );
+            this._ActionPointsGain = int.Parse(data["ActionPoints"]);
+            this._ActionPoints = _ActionPointsGain * 100;
+            
+            using( String[] quotes = DataCsvLoader.SubData(data["Quote"]) ) {
+                if(quotes.Length != 3)  
+                    throw new SaveGameException("Quotes not correct: "+ this.Code + ", " + data[Quote]);
+                this._QuoteIntercontiPlanned = Int.Parse(quotes[0]);
+                this._QuoteInternatPlanned = Int.Parse(quotes[1]);
+                this._QuoteNationalPlanned = Int.Parse(quotes[2]);
+            }
+            this._QualityLevelPlanned = Int.Parse(data[QualityLevel]);
+            
+            using String[] Types = DataCsvLoader.SubData(data["AircraftModels"]) ) 
+            {
+                foreach(String type in types) 
+                {
+                    bool found = false;
+                    foreach(Aircraft ac in SaveGamePublic.SaveGame.Aircrafts) 
+                    {
+                        if(ac.Family == type) {
+                            found = true;
+                            break;
+                        } // end if                    
+                    } // end Foreach Aircraft
+                    if (found) {
+                        this.AllowedAircraftTypes.Add(type);
+                    } else {
+                      throw new SaveGameException("Aircraft-Type not found: "+ this.Code + ", " + type]);  
+                    }
+                } // end looping trough Models
+            }// end Using Aircraftmodels
             throw new NotImplementedException();
-        }
+        } // End Constructor
 
         public EnemyAirline(SerializationInfo info, StreamingContext context) {
             throw new NotImplementedException();
-        }
+        } // end deserializer
 
         public override void GetObjectData(SerializationInfo info, StreamingContext context)
         {
