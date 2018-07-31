@@ -21,11 +21,11 @@ namespace AirCoon.Game.Handler
             {
                 LastLine = Stream.ReadLine();
             } else if (firstlineisheaders) {
-                Headers = this.GetNextLine(1);
+                Headers = this.GetNextLine();
             }
         }
 
-        public String[] GetNextLine(int minElements = 1)
+        public String[] GetNextLine(int minElements = 2)
         {
             PrevLine = LastLine;
             LastLine = Stream.ReadLine();
@@ -49,15 +49,11 @@ namespace AirCoon.Game.Handler
                 Stream.Close();
                 return null;
             }     
-            for(int i = 0; i < splitted.Length; i++){
-                if(splitted[i] == "_NULL_")
-                    splitted[i] = null;
-            }
             return splitted;
             
-        }
+        } // end Getnextline
 
-        public Dictionary<string, string> GetNextLineHeaders(int minElements = 1)
+        public Dictionary<string, string> GetNextLineHeaders(int minElements = 2)
         {
             String[] data = this.GetNextLine(minElements);
 
@@ -70,6 +66,13 @@ namespace AirCoon.Game.Handler
                 result.Add(this.Headers[i], data[i]);
             }
             return result;
+        } // end GetNextLineHeaders
+        
+        public static String[] SubData(String dataset) {
+            if(dataset == null) return new String[];
+            
+            return dataset.Split(new Char[] { ';' });
         }
-    }
-}
+        
+    } // end class
+} // end Namespace
