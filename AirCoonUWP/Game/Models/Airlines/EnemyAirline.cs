@@ -80,12 +80,21 @@ namespace AirCoon.Game.Models.Airlines
             this._QuoteNationalPlanned      = info.GetInt32("QuoteNationalPlanned");
             this._QualityLevelPlanned       = info.GetInt32("QualityLevelPlanned");
          
-            AllowedAircraftTypes =  (List<String>) info.GetValue("AllowedAircraftTypes", typeof(List<String>) );
+            this.AllowedAircraftTypes =  (List<String>) info.GetValue("AllowedAircraftTypes", typeof(List<String>) );
         } // END Deserializer
 
         public override void GetObjectData(SerializationInfo info, StreamingContext context)
         {
             base.SerializeSubClass(info, context);
+            info.AddValue("ActionPoints", this._ActionPoints);
+            info.AddValue("ActionPointsGain", this._ActionPointsGain);
+            info.AddValue("QuoteIntercontiPlanned", this._QuoteIntercontiPlanned);
+            info.AddValue("QuoteInternatPlanned", this._QuoteInternatPlanned);
+            info.AddValue("QuoteNationalPlanned", this._QuoteNationalPlanned);
+            info.AddValue("QualityLevelPlanned", this._QualityLevelPlanned);
+
+            info.AddValue("AllowedAircraftTypes", this.AllowedAircraftTypes);
+
             throw new NotImplementedException();
         }
 
