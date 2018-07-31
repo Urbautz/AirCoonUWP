@@ -75,7 +75,13 @@ namespace AirCoon.Game.Models.Airlines
             this._Bases = bases;
             this._Alliance = alliance;
         }
-
+        public void SerializeSubClass(SerializationInfo info, StreamingContext context) {
+            info.AddValue("Code", this.Code);
+            info.AddValue("Name", this.Name);
+            info.AddValue("Hubs", this.Hubs);
+            info.AddValue("Bases", this.Bases);
+            info.AddValue("Alliance", this.Alliance.Code);
+        }
 
         public abstract void GetObjectData(SerializationInfo info, StreamingContext context);
 
