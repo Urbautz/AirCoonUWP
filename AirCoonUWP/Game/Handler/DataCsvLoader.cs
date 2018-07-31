@@ -69,7 +69,7 @@ namespace AirCoon.Game.Handler
         } // end GetNextLineHeaders
         
         public static String[] SubData(String dataset) {
-            if(dataset == null) return new String[];
+            if(dataset == null) return null;
             
             return dataset.Split(new Char[] { ';' });
         }

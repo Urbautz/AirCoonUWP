@@ -63,13 +63,13 @@ namespace AirCoon.Game.Models.Airlines
             
         }
 
-        public void DeserializeSubClass((SerializationInfo info, StreamingContext context)
+        public void DeserializeSubClass(SerializationInfo info, StreamingContext context)
         {
             this._Code      = info.GetString("Code");
             this._Name      = info.GetString("Name");
             this._Hubs      =  (Dictionary < String, Hub > ) info.GetValue("Hubs", typeof(Dictionary<String,Hub>) );
             this._Bases     =  (List<Base>) info.GetValue("Bases", typeof(List<Base>) );
-            this._Alliance  = SaveGamePublic.SaveGame.Alliances[info.GetString("Alliance")]
+            this._Alliance  = SaveGamePublic.SaveGame.Alliances[info.GetString("Alliance")];
            
         }
         
