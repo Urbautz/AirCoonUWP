@@ -67,12 +67,23 @@ namespace AirCoon.Game.Models.Airlines
             throw new NotImplementedException();
         } // End Constructor
 
-        public EnemyAirline(SerializationInfo info, StreamingContext context) {
-            throw new NotImplementedException();
-        } // end deserializer
+        
+        public EnemyAirline(SerializationInfo info, StreamingContext context)
+        {
+            base.DeserializeSubClass(info, context);
+            this.ActionPoints               = info.GetInt32("ActionPoints");
+            this._ActionPointsGain          = info.GetInt32("ActionPointsGain");
+            this._QuoteIntercontiPlanned    = info.GetInt32("QuoteIntercontiPlanned");
+            this._QuoteInternatPlanned      = info.GetInt32("QuoteInternatPlanned");
+            this._QuoteNationalPlanned      = info.GetInt32("QuoteNationalPlanned");
+            this._QualityLevelPlanned       = info.GetInt32("QualityLevelPlanned");
+         
+            AllowedAircraftTypes =  (List<String>) info.GetValue("AllowedAircraftTypes", typeof(List<String>) );
+        } // END Deserializer
 
         public override void GetObjectData(SerializationInfo info, StreamingContext context)
         {
+            base.SerializeSubClass(info, context);
             throw new NotImplementedException();
         }
 
