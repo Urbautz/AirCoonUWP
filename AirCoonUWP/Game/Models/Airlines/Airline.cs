@@ -45,6 +45,8 @@ namespace AirCoon.Game.Models.Airlines
             }
         }
         public Alliance Alliance { get { return _Alliance; } }
+        
+
 
         
         public void CreateSubClass(String code, String name, List<Airport> hub_airports, Alliance alliance, Money startmoney = null)
